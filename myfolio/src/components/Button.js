@@ -12,7 +12,7 @@ const SIZES = {
   `,
   md: css`
     --button-height: 40px;
-    --button-radius: 4px;
+    --button-radius: 5px;
     --button-font-size: 16px;
     --button-padding: 8px 16px;
   `,
