@@ -20,7 +20,7 @@ export default function Input({
   value,
   label,
   LeftDescription,
-  icon,
+  Type,
 }) {
   const variantStyle = VARIANTS[variant];
   return (
@@ -32,6 +32,7 @@ export default function Input({
           placeholder={placeholder}
           disabled={disabled}
           value={value}
+          type={Type}
         />
         <HiBolt
           style={{ width: "16px", height: "16px", margin: "0 12px 0 0" }}
