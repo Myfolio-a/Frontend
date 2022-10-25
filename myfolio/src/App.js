@@ -11,7 +11,8 @@ function App() {
   return (
     <div className="App">
       <Global styles={style} />
-      {/* <Link to="/">Home</Link>
+      {/* Navigater
+      <Link to="/">Home</Link>
       <Link to="/signup">Sign Up</Link>
       <Link to="/login">Login</Link>
       <Link to="/main">Main</Link> */}

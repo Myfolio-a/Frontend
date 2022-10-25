@@ -11,6 +11,12 @@ const VARIANTS = {
     --input-focus-border: inset 0px 0px 0px 2px ${colors.error500};
     --input-description: ${colors.error500};
   `,
+  default: css`
+    --input-default-border: inset 0px 0px 0px 1px ${colors.grey100};
+    --input-hover-border: inset 0px 0px 0px 1px ${colors.grey900};
+    --input-focus-border: inset 0px 0px 0px 2px ${colors.primary500};
+    --input-description: ${colors.grey600};
+  `,
 };
 
 export default function Input({
@@ -23,6 +29,7 @@ export default function Input({
   Type,
   icon,
   handleIconClick,
+  ...rest
 }) {
   const variantStyle = VARIANTS[variant];
   return (
@@ -37,6 +44,7 @@ export default function Input({
             value={value}
             type={Type}
             icon={icon}
+            {...rest}
           />
           <InputIconFrame onClick={handleIconClick}>{icon}</InputIconFrame>
         </StyledInputFrame>
@@ -110,12 +118,13 @@ const InputLeftDescription = styled.div`
   color: var(--input-description, ${colors.grey600});
   font-size: 12px;
   font-weight: 400;
+  margin-left: 4px;
 `;
 
 const InputLabel = styled.div`
   font-family: "SUIT";
   color: ${colors.grey600};
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 400;
   margin-bottom: 8px;
 `;
