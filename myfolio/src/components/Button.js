@@ -24,18 +24,44 @@ const SIZES = {
   `,
 };
 
-export default function Button({ disabled, children, size }) {
+export default function Button({
+  disabled,
+  children,
+  size,
+  fullWidth,
+  ...rest
+}) {
   const sizeStyle = SIZES[size];
 
   return (
-    <StyledButton disabled={disabled} sizeStyle={sizeStyle}>
+    <StyledButton
+      disabled={disabled}
+      sizeStyle={sizeStyle}
+      fullWidth={fullWidth}
+      {...rest}
+    >
       {children}
     </StyledButton>
   );
 }
 
+const fullWidthStyle = css`
+  ${(p) =>
+    p.fullWidth &&
+    css`
+      margin: 0;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+    `}
+`;
+
 const StyledButton = styled.button`
   ${(p) => p.sizeStyle}
+
+  ${fullWidthStyle}
+
+  display: inline-flex;
 
   height: var(--button-height, 40px);
   margin: 0;
