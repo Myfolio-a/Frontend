@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Router } from "react-router-dom";
 import styled from "@emotion/styled";
 import Button from "../components/Button";
@@ -7,6 +7,21 @@ import { HiOutlineEye, HiOutlineEyeSlash } from "react-icons/hi2";
 import * as colors from "../styles/colors";
 
 export default function Login() {
+  const [passwordType, setPasswordType] = useState({
+    type: "password",
+    visible: false,
+  });
+
+  const handlePasswordType = (e) => {
+    setPasswordType(() => {
+      if (!passwordType.visible) {
+        return { type: "text", visible: true };
+      } else {
+        return { type: "password", visible: false };
+      }
+    });
+  };
+
   return (
     <Container>
       <RFrame>
@@ -20,8 +35,11 @@ export default function Login() {
             <Input
               label="Password"
               placeholder="비밀번호를 입력해주세요."
-              Type="password"
-              icon={<HiOutlineEye />}
+              Type={passwordType.type}
+              icon={
+                passwordType.visible ? <HiOutlineEyeSlash /> : <HiOutlineEye />
+              }
+              handleIconClick={handlePasswordType}
             />
           </InputsFrame>
           <Button size="lg" fullWidth>

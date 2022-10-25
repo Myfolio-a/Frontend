@@ -22,6 +22,7 @@ export default function Input({
   LeftDescription,
   Type,
   icon,
+  handleIconClick,
 }) {
   const variantStyle = VARIANTS[variant];
   return (
@@ -37,7 +38,7 @@ export default function Input({
             type={Type}
             icon={icon}
           />
-          <div>{icon}</div>
+          <InputIconFrame onClick={handleIconClick}>{icon}</InputIconFrame>
         </StyledInputFrame>
         <InputLeftDescription variantStyle={variantStyle}>
           {LeftDescription}
@@ -46,6 +47,10 @@ export default function Input({
     </InputFrame>
   );
 }
+
+const InputIconFrame = styled.div`
+  cursor: pointer;
+`;
 
 const DescriptionFrame = styled.div`
   display: flex;
