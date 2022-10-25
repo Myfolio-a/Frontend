@@ -21,29 +21,37 @@ export default function Input({
   label,
   LeftDescription,
   Type,
+  icon,
 }) {
   const variantStyle = VARIANTS[variant];
   return (
     <InputFrame>
       <InputLabel>{label}</InputLabel>
-      <StyledInputFrame variantStyle={variantStyle} disabled={disabled}>
-        <StyledInput
-          variantStyle={variantStyle}
-          placeholder={placeholder}
-          disabled={disabled}
-          value={value}
-          type={Type}
-        />
-        <HiBolt
-          style={{ width: "16px", height: "16px", margin: "0 12px 0 0" }}
-        />
-      </StyledInputFrame>
-      <InputLeftDescription variantStyle={variantStyle}>
-        {LeftDescription}
-      </InputLeftDescription>
+      <DescriptionFrame>
+        <StyledInputFrame variantStyle={variantStyle} disabled={disabled}>
+          <StyledInput
+            variantStyle={variantStyle}
+            placeholder={placeholder}
+            disabled={disabled}
+            value={value}
+            type={Type}
+            icon={icon}
+          />
+          <div>{icon}</div>
+        </StyledInputFrame>
+        <InputLeftDescription variantStyle={variantStyle}>
+          {LeftDescription}
+        </InputLeftDescription>
+      </DescriptionFrame>
     </InputFrame>
   );
 }
+
+const DescriptionFrame = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+`;
 
 const StyledInputFrame = styled.div`
   ${(p) => p.variantStyle}
@@ -52,7 +60,11 @@ const StyledInputFrame = styled.div`
     css`
       pointer-events: none;
     `};
-
+  & > div > svg {
+    width: 16px;
+    height: 16px;
+    margin: 0 12px 0 0;
+  }
   height: 36px;
   display: flex;
   align-items: center;
@@ -62,6 +74,7 @@ const StyledInputFrame = styled.div`
   border: none;
   outline: none;
   border-radius: 4px;
+  background-color: ${colors.white};
   box-shadow: var(
     --input-default-border,
     inset 0px 0px 0px 1px ${colors.grey100}
@@ -81,6 +94,7 @@ const StyledInputFrame = styled.div`
 `;
 
 const InputFrame = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
 `;
@@ -91,7 +105,6 @@ const InputLeftDescription = styled.div`
   color: var(--input-description, ${colors.grey600});
   font-size: 12px;
   font-weight: 400;
-  margin-top: 4px;
 `;
 
 const InputLabel = styled.div`
@@ -110,6 +123,8 @@ const StyledInput = styled.input`
   margin: 0;
   border: none;
   outline: none;
+
+  width: 100%;
 
   padding: var(--input-padding, 6px 12px);
   background-color: ${colors.white};
