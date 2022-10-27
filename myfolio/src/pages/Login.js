@@ -8,7 +8,14 @@ import * as colors from "../styles/colors";
 
 export default function Login() {
   const [email, setEmail] = useState("");
-  const [error, setError] = useState(false);
+  const [password, setPassword] = useState("");
+
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
+  const [emailErrorMessage, setEmailErrorMessage] = useState("");
+
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+
   const [passwordType, setPasswordType] = useState({
     type: "password",
     visible: false,
@@ -29,13 +36,52 @@ export default function Login() {
       /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
     // 형식에 맞는 경우 true 리턴
     if (regExp.test(e.target.value)) {
-      setError(false);
+      setEmailError(false);
       setEmail(e.target.value);
-      console.log(email);
+      setEmailErrorMessage("");
     } else {
-      setError(true);
-      console.log(error);
+      setEmailError(true);
+      setEmailErrorMessage("올바른 이메일 형식이 아닙니다.");
     }
+  };
+
+  const checkPassword = (e) => {
+    if (e.target.value.length >= 8 && e.target.value.length <= 50) {
+      setPasswordError(false);
+      setPassword(e.target.value);
+      setPasswordErrorMessage("");
+    }
+    if (e.target.value.length < 8 || e.target.value.length > 50) {
+      setPasswordError(true);
+      setPasswordErrorMessage(
+        "비밀번호는 문자와 숫자가 포함된 8글자 이상 50자이하여야 합니다."
+      );
+    }
+  };
+
+  const check = emailError || passwordError;
+
+  const handleButtonClick = () => {
+    if (check === true) {
+      return console.log("error");
+    }
+    if (email === "" || password === "") {
+      if (email === "") {
+        setEmailError(true);
+        setEmailErrorMessage("이메일을 입력해주세요.");
+        console.log("Email error");
+      }
+      if (password === "") {
+        setPasswordError(true);
+        setPasswordErrorMessage("비밀번호를 입력해주세요.");
+        console.log("Password error");
+      }
+      return;
+    }
+    console.log("Login");
+    // call api
+    console.log(email);
+    console.log(password);
   };
 
   return (
@@ -51,8 +97,9 @@ export default function Login() {
               label="이메일"
               placeholder="이메일을 입력해주세요."
               onBlur={checkEmail}
-              variant={error ? `error` : `default`}
-              LeftDescription={error ? `올바른 이메일 형식이 아닙니다.` : ``}
+              onChange={checkEmail}
+              variant={emailError ? `error` : `default`}
+              LeftDescription={emailErrorMessage}
             />
             <Input
               label="비밀번호"
@@ -62,9 +109,13 @@ export default function Login() {
                 passwordType.visible ? <HiOutlineEye /> : <HiOutlineEyeSlash />
               }
               handleIconClick={handlePasswordType}
+              variant={passwordError ? `error` : `default`}
+              onBlur={checkPassword}
+              onChange={checkPassword}
+              LeftDescription={passwordErrorMessage}
             />
           </InputsFrame>
-          <Button size="lg" fullWidth>
+          <Button size="lg" fullWidth onClick={handleButtonClick}>
             로그인
           </Button>
           <TextFrame>
