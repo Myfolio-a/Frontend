@@ -5,6 +5,9 @@ import Button from "../components/Button";
 import Input from "../components/Input";
 import { HiOutlineEye, HiOutlineEyeSlash } from "react-icons/hi2";
 import * as colors from "../styles/colors";
+import axios from "../api/axios";
+
+const LOGIN_URL = "/auth/login";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -26,7 +29,7 @@ export default function SignUp() {
 
   const check = emailError || nicknameError || passwordError;
 
-  const handleButtonClick = () => {
+  const handleButtonClick = async () => {
     if (check === true) {
       return console.log("Error");
     }
@@ -54,6 +57,22 @@ export default function SignUp() {
     console.log(password);
 
     // call api
+
+    try {
+      const response = await axios.post(LOGIN_URL, {
+        email: email,
+        password: password,
+      });
+      const token = response.data;
+      // 토큰을 로컬스토리지에 저장한다.
+      // 전역상태에 있는 로그인 상태를 true로 바꾼다.
+      // home 으로 이동한다. (useNavigate)
+    } catch (err) {
+      if (!err?.response) {
+        console.log("No server response");
+      } else if (err?.response.status === "") {
+      }
+    }
   };
 
   const handlePasswordType = (e) => {

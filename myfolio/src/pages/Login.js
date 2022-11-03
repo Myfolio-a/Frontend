@@ -8,13 +8,12 @@ import * as colors from "../styles/colors";
 
 export default function Login() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
+  const [emailError, setEmailError] = useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
 
-  const [emailError, setEmailError] = useState(false);
+  const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState(false);
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
 
   const [passwordType, setPasswordType] = useState({
     type: "password",
@@ -79,9 +78,9 @@ export default function Login() {
       return;
     }
     console.log("Login");
-    // call api
     console.log(email);
     console.log(password);
+    // call api
   };
 
   return (
