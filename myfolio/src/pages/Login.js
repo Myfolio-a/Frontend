@@ -1,12 +1,19 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import { HiOutlineEye, HiOutlineEyeSlash } from "react-icons/hi2";
 import * as colors from "../styles/colors";
+import axios from "../api/axios";
+import { response } from "msw";
+
+const LOGIN_URL = "v1/auth/login";
 
 export default function Login() {
+  const [loading, setLoading] = useState(false);
+  const [loginFail, setLoginFail] = useState(false);
+
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
@@ -14,6 +21,8 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
+
+  const navigate = useNavigate();
 
   const [passwordType, setPasswordType] = useState({
     type: "password",
@@ -59,8 +68,13 @@ export default function Login() {
   };
 
   const check = emailError || passwordError;
+  const failMessage =
+    "이메일 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.";
 
-  const handleButtonClick = () => {
+  const handleButtonClick = async () => {
+    setLoading(true);
+    console.log("Loading ...");
+
     if (check === true) {
       return console.log("error");
     }
@@ -81,6 +95,33 @@ export default function Login() {
     console.log(email);
     console.log(password);
     // call api
+    try {
+      setLoginFail(false);
+      const response = await axios.post(LOGIN_URL, {
+        email,
+        password,
+      });
+      const token = response.data.token;
+      // 토큰을 로컬스토리지에 저장한다.
+      if (token) {
+        localStorage.setItem("login-token", token);
+        console.log("Saved token to local storage.");
+      }
+      // 전역상태에 있는 로그인 상태를 true로 바꾼다.
+
+      // home 으로 이동한다. (useNavigate)
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+      if (!err?.response) {
+        console.log("No server response");
+      } else if (err.response.status === 400) {
+        setLoginFail(true);
+        console.log("Validation Error");
+      }
+    }
+    setLoading(false);
+    console.log("NOT LOADING");
   };
 
   return (
@@ -114,8 +155,14 @@ export default function Login() {
               LeftDescription={passwordErrorMessage}
             />
           </InputsFrame>
-          <Button size="lg" fullWidth onClick={handleButtonClick}>
-            로그인
+          <LoginFailMessage>{loginFail ? failMessage : ""}</LoginFailMessage>
+          <Button
+            size="lg"
+            fullWidth
+            onClick={handleButtonClick}
+            loading={loading}
+          >
+            {loading ? "" : "로그인"}
           </Button>
           <TextFrame>
             <div>마이폴리오에 처음이신가요 ?</div>
@@ -129,6 +176,14 @@ export default function Login() {
     </Container>
   );
 }
+
+const LoginFailMessage = styled.div`
+  color: ${colors.error500};
+  width: 100%;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 18px;
+`;
 
 const TextFrame = styled.div`
   display: flex;

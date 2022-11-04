@@ -17,9 +17,9 @@ function App() {
       <Link to="/login">Login</Link>
       <Link to="/main">Main</Link> */}
       <Routes>
-        <Route exact path="/" element={<Login />} />
+        <Route exact path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<Home />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/main" element={<Main />} />
       </Routes>
     </div>
