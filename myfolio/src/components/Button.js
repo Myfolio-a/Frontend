@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import React from "react";
 import * as colors from "../styles/colors";
+import BeatLoader from "react-spinners/BeatLoader";
 
 const SIZES = {
   sm: css`
@@ -29,6 +30,7 @@ export default function Button({
   children,
   size,
   fullWidth,
+  loading,
   ...rest
 }) {
   const sizeStyle = SIZES[size];
@@ -41,6 +43,7 @@ export default function Button({
       {...rest}
     >
       {children}
+      {loading ? <BeatLoader color={colors.white} /> : ""}
     </StyledButton>
   );
 }
