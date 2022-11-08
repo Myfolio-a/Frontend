@@ -91,9 +91,6 @@ export default function Login() {
       }
       return;
     }
-    console.log("Login");
-    console.log(email);
-    console.log(password);
     // call api
     try {
       setLoginFail(false);

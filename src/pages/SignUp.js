@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import Button from "../components/Button";
 import Input from "../components/Input";
@@ -7,7 +7,11 @@ import { HiOutlineEye, HiOutlineEyeSlash } from "react-icons/hi2";
 import * as colors from "../styles/colors";
 import axios from "../api/axios";
 
+const REGISTER_URL = "/v1/users";
+
 export default function SignUp() {
+  const [loading, setLoading] = useState(false);
+
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
@@ -24,6 +28,8 @@ export default function SignUp() {
     type: "password",
     visible: false,
   });
+
+  const navigate = useNavigate();
 
   const check = emailError || nicknameError || passwordError;
 
@@ -55,6 +61,22 @@ export default function SignUp() {
     console.log(password);
 
     // call api
+    try {
+      const response = await axios.post(REGISTER_URL, {
+        email,
+        username: nickname,
+        password,
+      });
+      navigate("/login");
+    } catch (err) {
+      console.log(err);
+      if (!err?.response) {
+        console.log("No server response");
+      } else if (err.response.status === 500) {
+        console.log("Validation Error");
+      }
+    }
+    setLoading(false);
   };
 
   const handlePasswordType = (e) => {
@@ -146,12 +168,17 @@ export default function SignUp() {
               LeftDescription={passwordErrorMessage}
             />
           </InputsFrame>
-          <Button size="lg" fullWidth onClick={handleButtonClick}>
-            회원가입
+          <Button
+            size="lg"
+            fullWidth
+            onClick={handleButtonClick}
+            loading={loading}
+          >
+            {loading ? "" : "회원가입"}
           </Button>
           <TextFrame>
             <div>이미 계정이 있나요 ?</div>
-            <Link to="/" style={{ color: `${colors.primary500}` }}>
+            <Link to="/login" style={{ color: `${colors.primary500}` }}>
               로그인
             </Link>
           </TextFrame>
