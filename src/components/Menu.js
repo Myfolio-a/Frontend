@@ -1,9 +1,25 @@
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import * as colors from "../styles/colors";
 
-export default function Menu({ Icon, Text, onClick, ...rest }) {
+const VARIANTS = {
+  selected: css`
+    --font-weight: 600;
+    --icon-color: ${colors.grey900};
+    --text-color: ${colors.grey900};
+    --background-color: ${colors.grey50};
+  `,
+};
+
+export default function Menu({ Icon, Text, onClick, variant, ...rest }) {
+  const variantStyle = VARIANTS[variant];
   return (
-    <MenuItem Icon={Icon} Text={Text} onClick={onClick}>
+    <MenuItem
+      variantStyle={variantStyle}
+      Icon={Icon}
+      Text={Text}
+      onClick={onClick}
+    >
       <IconFrame>{Icon}</IconFrame>
       <TextFrame>{Text}</TextFrame>
     </MenuItem>
@@ -11,8 +27,9 @@ export default function Menu({ Icon, Text, onClick, ...rest }) {
 }
 
 const TextFrame = styled.div`
+  ${(p) => p.variantStyle}
   font-size: 16px;
-  font-weight: 400;
+  font-weight: var(--font-weight, 400);
   line-height: 22px;
   color: var(--text-color, ${colors.grey500});
 
@@ -22,6 +39,7 @@ const TextFrame = styled.div`
 `;
 
 const IconFrame = styled.div`
+  ${(p) => p.variantStyle}
   & > svg {
     width: 20px;
     height: 20px;
@@ -36,6 +54,7 @@ const IconFrame = styled.div`
 `;
 
 const MenuItem = styled.div`
+  ${(p) => p.variantStyle}
   height: 40px;
   width: 100%;
   border-radius: 4px;
@@ -46,8 +65,12 @@ const MenuItem = styled.div`
   flex-direction: row;
 
   &:hover {
-    background-color: ${colors.grey50};
+    --background-color: ${colors.grey50};
     --icon-color: ${colors.grey600};
     --text-color: ${colors.grey600};
+  }
+
+  &:active {
+    --background-color: ${colors.grey100};
   }
 `;

@@ -2,7 +2,7 @@
   "name": "myfolio",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://zn63mcauknzyrbwhmuipgthz5a0uuzun.lambda-url.ap-northeast-2.on.aws",
+  "proxy": "https://y3c85nbyn7.execute-api.ap-northeast-2.amazonaws.com/",
   "dependencies": {
     "@emotion/css": "^11.10.0",
     "@emotion/react": "^11.10.4",

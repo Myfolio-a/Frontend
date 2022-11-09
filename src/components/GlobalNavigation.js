@@ -37,7 +37,12 @@ export default function GlobalNavigation() {
     <Background>
       <LogoFrame>Logo Here</LogoFrame>
       <MenuFrame>
-        <Menu Text="Home" Icon={<HiOutlineHome />} onClick={onClickHome} />
+        <Menu
+          Text="Home"
+          Icon={<HiOutlineHome />}
+          onClick={onClickHome}
+          variant="selected"
+        />
         <Menu
           Text="Favorite"
           Icon={<HiOutlineHeart />}
