@@ -34,6 +34,7 @@ export default function SignUp() {
   const check = emailError || nicknameError || passwordError;
 
   const handleButtonClick = async () => {
+    setLoading(true);
     if (check === true) {
       return console.log("Error");
     }
@@ -67,13 +68,21 @@ export default function SignUp() {
         username: nickname,
         password,
       });
+      alert("성공적으로 가입되었습니다.");
       navigate("/login");
     } catch (err) {
       console.log(err);
       if (!err?.response) {
         console.log("No server response");
-      } else if (err.response.status === 500) {
-        console.log("Validation Error");
+      } else if (err.response.status === 400) {
+        if (err.response.data.detail.includes("email")) {
+          setEmailError(true);
+          setEmailErrorMessage("이미 가입된 이메일입니다.");
+        }
+        if (err.response.data.detail.includes("username")) {
+          setNicknameError(true);
+          setNicknameErrorMessage("이미 사용중인 닉네임입니다.");
+        }
       }
     }
     setLoading(false);
