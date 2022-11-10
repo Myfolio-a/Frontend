@@ -68,8 +68,12 @@ export default function SignUp() {
         username: nickname,
         password,
       });
-      alert("성공적으로 가입되었습니다.");
-      navigate("/login");
+      const token = response.data.token;
+      if (token) {
+        localStorage.setItem("login-token", token);
+        console.log("Saved token to local storage.");
+      }
+      navigate("/");
     } catch (err) {
       console.log(err);
       if (!err?.response) {
