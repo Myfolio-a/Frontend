@@ -48,7 +48,9 @@ export default function Button({
   );
 }
 
-const fullWidthStyle = css`
+const StyledButton = styled.button`
+  ${(p) => p.sizeStyle}
+
   ${(p) =>
     p.fullWidth &&
     css`
@@ -57,12 +59,6 @@ const fullWidthStyle = css`
       justify-content: center;
       align-items: center;
     `}
-`;
-
-const StyledButton = styled.button`
-  ${(p) => p.sizeStyle}
-
-  ${fullWidthStyle}
 
   display: inline-flex;
 
