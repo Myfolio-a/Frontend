@@ -7,6 +7,7 @@ import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
 import Favorite from "./pages/Favorite";
 import Edit from "./pages/Edit";
+import More from "./pages/More";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Link to="/main">Main</Link> */}
       <Routes>
         <Route exact path="/" element={<Home />} />
+        <Route path="/item/:itemId" element={<More />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/favorite" element={<Favorite />} />

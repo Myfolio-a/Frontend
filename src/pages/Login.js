@@ -8,7 +8,8 @@ import * as colors from "../styles/colors";
 import axios from "../api/axios";
 import { response } from "msw";
 
-const LOGIN_URL = "v1/auth/login";
+const LOGIN_URL =
+  "https://y3c85nbyn7.execute-api.ap-northeast-2.amazonaws.com/v1/auth/login";
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
@@ -155,9 +156,9 @@ export default function Login() {
           <LoginFailMessage>{loginFail ? failMessage : ""}</LoginFailMessage>
           <Button
             size="lg"
-            fullWidth
             onClick={handleButtonClick}
             loading={loading}
+            fullWidth
           >
             {loading ? "" : "로그인"}
           </Button>

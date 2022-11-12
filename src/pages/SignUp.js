@@ -7,7 +7,8 @@ import { HiOutlineEye, HiOutlineEyeSlash } from "react-icons/hi2";
 import * as colors from "../styles/colors";
 import axios from "../api/axios";
 
-const REGISTER_URL = "/v1/users";
+const REGISTER_URL =
+  "https://y3c85nbyn7.execute-api.ap-northeast-2.amazonaws.com/v1/users";
 
 export default function SignUp() {
   const [loading, setLoading] = useState(false);
@@ -34,10 +35,10 @@ export default function SignUp() {
   const check = emailError || nicknameError || passwordError;
 
   const handleButtonClick = async () => {
-    setLoading(true);
     if (check === true) {
       return console.log("Error");
     }
+    setLoading(true);
     if (email === "" || password === "" || nickname === "") {
       if (email === "") {
         setEmailError(true);
@@ -56,10 +57,6 @@ export default function SignUp() {
       }
       return;
     }
-    console.log("sign up");
-    console.log(nickname);
-    console.log(email);
-    console.log(password);
 
     // call api
     try {
@@ -79,13 +76,43 @@ export default function SignUp() {
       if (!err?.response) {
         console.log("No server response");
       } else if (err.response.status === 400) {
-        if (err.response.data.detail.includes("email")) {
-          setEmailError(true);
-          setEmailErrorMessage("이미 가입된 이메일입니다.");
-        }
-        if (err.response.data.detail.includes("username")) {
+        if (
+          err.response.data.errors.find(
+            ({ code }) => code === "duplicated_username"
+          )
+        ) {
           setNicknameError(true);
-          setNicknameErrorMessage("이미 사용중인 닉네임입니다.");
+          setNicknameErrorMessage("중복된 닉네임입니다.");
+        }
+        if (
+          err.response.data.errors.find(
+            ({ code }) => code === "duplicated_email"
+          )
+        ) {
+          setEmailError(true);
+          setEmailErrorMessage("중복된 이메일입니다.");
+        }
+        if (
+          err.response.data.errors.find(({ code }) => code === "invalid_email")
+        ) {
+          setEmailError(true);
+          setEmailErrorMessage("사용할 수 없는 이메일입니다.");
+        }
+        if (
+          err.response.data.errors.find(
+            ({ code }) => code === "invalid_username"
+          )
+        ) {
+          setNicknameError(true);
+          setNicknameErrorMessage("사용할 수 없는 닉네임입니다.");
+        }
+        if (
+          err.response.data.errors.find(
+            ({ code }) => code === "invalid_password"
+          )
+        ) {
+          setPasswordError(true);
+          setPasswordErrorMessage("사용할 수 없는 비밀번호입니다.");
         }
       }
     }
@@ -183,9 +210,9 @@ export default function SignUp() {
           </InputsFrame>
           <Button
             size="lg"
-            fullWidth
             onClick={handleButtonClick}
             loading={loading}
+            fullWidth
           >
             {loading ? "" : "회원가입"}
           </Button>

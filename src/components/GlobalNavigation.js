@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import * as colors from "../styles/colors";
 import Menu from "../components/Menu";
+import { useMatch } from "react-router-dom";
 import {
   HiHome,
   HiOutlineHome,
@@ -12,6 +13,10 @@ import { useNavigate } from "react-router-dom";
 
 export default function GlobalNavigation() {
   const navigate = useNavigate();
+
+  const matchHomeMenu = useMatch("/");
+  const matchFavoriteMenu = useMatch("/favorite");
+  const matchEditMenu = useMatch("/edit");
 
   const onClickLogin = () => {
     return navigate("/login");
@@ -41,17 +46,19 @@ export default function GlobalNavigation() {
           Text="Home"
           Icon={<HiOutlineHome />}
           onClick={onClickHome}
-          variant="selected"
+          variant={matchHomeMenu ? "selected" : ""}
         />
         <Menu
           Text="Favorite"
           Icon={<HiOutlineHeart />}
           onClick={onClickFavorite}
+          variant={matchFavoriteMenu ? "selected" : ""}
         />
         <Menu
           Text="Edit Place"
           Icon={<HiOutlinePencil />}
           onClick={onClickEdit}
+          variant={matchEditMenu ? "selected" : ""}
         />
       </MenuFrame>
       <MenuFrame>
@@ -88,4 +95,7 @@ const Background = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
+  position: fixed;
+  left: 0;
+  top: 0;
 `;
