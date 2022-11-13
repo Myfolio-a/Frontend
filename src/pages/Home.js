@@ -86,7 +86,7 @@ const RedColor = styled.div`
   background-color: ${colors.white};
 
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   row-gap: 16px;
   column-gap: 16px;
 `;
