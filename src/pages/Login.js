@@ -74,7 +74,6 @@ export default function Login() {
 
   const handleButtonClick = async () => {
     setLoading(true);
-    console.log("Loading ...");
 
     if (check === true) {
       return console.log("error");
@@ -119,7 +118,6 @@ export default function Login() {
       }
     }
     setLoading(false);
-    console.log("NOT LOADING");
   };
 
   return (
