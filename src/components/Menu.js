@@ -20,7 +20,7 @@ export default function Menu({ Icon, Text, onClick, variant, ...rest }) {
       Text={Text}
       onClick={onClick}
     >
-      <IconFrame>{Icon}</IconFrame>
+      {Icon && <IconFrame>{Icon}</IconFrame>}
       <TextFrame>{Text}</TextFrame>
     </MenuItem>
   );
@@ -36,6 +36,8 @@ const TextFrame = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
+
+  padding-left: 12px;
 `;
 
 const IconFrame = styled.div`
@@ -47,7 +49,7 @@ const IconFrame = styled.div`
   }
   height: 20px;
   width: 20px;
-  padding-right: 12px;
+  padding-right: 0px;
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 10px;
