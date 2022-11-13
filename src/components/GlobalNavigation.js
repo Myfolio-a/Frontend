@@ -18,26 +18,6 @@ export default function GlobalNavigation() {
   const matchFavoriteMenu = useMatch("/favorite");
   const matchEditMenu = useMatch("/edit");
 
-  const onClickLogin = () => {
-    return navigate("/login");
-  };
-
-  const onClickSignUp = () => {
-    return navigate("/signup");
-  };
-
-  const onClickHome = () => {
-    return navigate("/");
-  };
-
-  const onClickFavorite = () => {
-    return navigate("/favorite");
-  };
-
-  const onClickEdit = () => {
-    return navigate("/edit");
-  };
-
   return (
     <Background>
       <LogoFrame>Logo Here</LogoFrame>
@@ -45,25 +25,33 @@ export default function GlobalNavigation() {
         <Menu
           Text="Home"
           Icon={<HiOutlineHome />}
-          onClick={onClickHome}
+          onClick={() => navigate("/")}
           variant={matchHomeMenu ? "selected" : ""}
         />
         <Menu
           Text="Favorite"
           Icon={<HiOutlineHeart />}
-          onClick={onClickFavorite}
+          onClick={() => navigate("/favorite")}
           variant={matchFavoriteMenu ? "selected" : ""}
         />
         <Menu
           Text="Edit Place"
           Icon={<HiOutlinePencil />}
-          onClick={onClickEdit}
+          onClick={() => navigate("/edit")}
           variant={matchEditMenu ? "selected" : ""}
         />
       </MenuFrame>
       <MenuFrame>
-        <Menu Text="Login" Icon={<HiOutlineFlag />} onClick={onClickLogin} />
-        <Menu Text="Sign Up" Icon={<HiOutlineFlag />} onClick={onClickSignUp} />
+        <Menu
+          Text="Login"
+          Icon={<HiOutlineFlag />}
+          onClick={() => navigate("/login")}
+        />
+        <Menu
+          Text="Sign Up"
+          Icon={<HiOutlineFlag />}
+          onClick={() => navigate("/signup")}
+        />
       </MenuFrame>
     </Background>
   );
