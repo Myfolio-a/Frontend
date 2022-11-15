@@ -102,7 +102,7 @@ const IconFrame = styled.div`
 const TopbarFrame = styled.div`
   width: calc(100% - 240px);
   height: 64px;
-  background-color: ${colors.white};
+  background-color: rgba(255, 255, 255, 0.9);
 
   position: fixed;
   left: 0;
