@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 import GlobalNavigation from "../components/GlobalNavigation";
 import GridItem from "../components/GridItem";
+import GridSkeleton from "../components/GridSkeleton";
 import Topbar from "../components/Topbar";
 import * as colors from "../styles/colors";
 
@@ -11,44 +12,6 @@ export default function Home() {
   const GETITEMS_URL =
     "https://y3c85nbyn7.execute-api.ap-northeast-2.amazonaws.com/v1/templates";
   const navigate = useNavigate();
-  const items = [
-    {
-      id: 1,
-      title: "test title 1",
-      username: "Seokmin Youn",
-      favorite: "1",
-    },
-    {
-      id: 2,
-      title: "test title 2",
-      username: "Seokmin Youn",
-      favorite: "3",
-    },
-    {
-      id: 3,
-      title: "test title 3",
-      username: "Seokmin Youn",
-      favorite: "20",
-    },
-    {
-      id: 4,
-      title: "test title 4",
-      username: "Sungu Kang",
-      favorite: "40",
-    },
-    {
-      id: 5,
-      title: "test title 5",
-      username: "Hello My name is",
-      favorite: "10",
-    },
-    {
-      id: 6,
-      title: "test title 6",
-      username: "Hello My name is",
-      favorite: "10",
-    },
-  ];
 
   const [loading, setLoading] = useState(false);
   const [template, setTemplate] = useState(null);
@@ -80,8 +43,8 @@ export default function Home() {
     return console.log(result[0].username);
   };
 
-  if (loading) return <div>Loading...</div>;
-  if (!template) return null;
+  // if (loading) return <div>Loading...</div>;
+  // if (!template) return null;
 
   return (
     <MainFrame>
@@ -89,24 +52,40 @@ export default function Home() {
       <ViewFrame>
         <Topbar />
         <GridViewFrame>
-          <RedColor>
-            {template.map((item) => (
-              <GridItem
-                key={item.template_id}
-                id={item.template_id}
-                title={item.title}
-                username={item.username}
-                favorite={item.likes}
-                handleItemClick={handleItemClick}
-                handleUserClick={handleUserClick}
-              />
-            ))}
-          </RedColor>
+          {loading || !template ? (
+            <RedColor>
+              <GridSkeleton />
+              <GridSkeleton />
+              <GridSkeleton />
+              <GridSkeleton />
+            </RedColor>
+          ) : (
+            <RedColor>
+              {template.map((item) => (
+                <GridItem
+                  key={item.template_id}
+                  id={item.template_id}
+                  title={item.title}
+                  username={item.username}
+                  favorite={item.likes}
+                  handleItemClick={handleItemClick}
+                  handleUserClick={handleUserClick}
+                />
+              ))}
+            </RedColor>
+          )}
         </GridViewFrame>
       </ViewFrame>
     </MainFrame>
   );
 }
+
+const SkeletonFrame = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 16px;
+  column-gap: 16px;
+`;
 
 const RedColor = styled.div`
   background-color: ${colors.white};
