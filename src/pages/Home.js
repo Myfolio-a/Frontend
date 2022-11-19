@@ -66,7 +66,7 @@ export default function Home() {
                   key={item.template_id}
                   id={item.template_id}
                   title={item.title}
-                  username={item.username}
+                  username={item.user.username}
                   favorite={item.likes}
                   handleItemClick={handleItemClick}
                   handleUserClick={handleUserClick}
