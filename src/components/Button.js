@@ -25,21 +25,38 @@ const SIZES = {
   `,
 };
 
+const VARIANTS = {
+  secondary: css`
+    --button-border: 1px solid ${colors.grey100};
+    --button-background-color: ${colors.white};
+    --button-color: ${colors.grey900};
+    --button-background-color: ${colors.white};
+    --button-color: ${colors.grey900};
+    --button-hover-background: ${colors.grey50};
+    --button-active-background: ${colors.grey100};
+    --button-disabled-background: ${colors.white};
+    --button-disabled-color: ${colors.grey300};
+  `,
+};
+
 export default function Button({
   disabled,
   children,
   size,
+  variant,
   fullWidth,
   loading,
   ...rest
 }) {
   const sizeStyle = SIZES[size];
+  const variantStyle = VARIANTS[variant];
 
   return (
     <StyledButton
       disabled={disabled}
       sizeStyle={sizeStyle}
       fullWidth={fullWidth}
+      variantStyle={variantStyle}
       {...rest}
     >
       {children}
@@ -50,6 +67,7 @@ export default function Button({
 
 const StyledButton = styled.button`
   ${(p) => p.sizeStyle}
+  ${(p) => p.variantStyle}
 
   ${(p) =>
     p.fullWidth &&
@@ -64,25 +82,26 @@ const StyledButton = styled.button`
 
   height: var(--button-height, 40px);
   margin: 0;
-  border: none;
+  border: var(--button-border, none);
   border-radius: var(--button-radius, 4px);
   cursor: pointer;
   padding: var(--button-padding, 8px 16px);
-  background-color: ${colors.primary500};
-  color: ${colors.white};
+  background-color: var(--button-background-color, ${colors.primary500});
+  color: var(--button-color, ${colors.white});
 
   font-family: "SUIT";
   font-size: var(--button-font-size, 16px);
   font-weight: 600;
 
   &:hover {
-    background-color: ${colors.primary700};
+    background-color: var(--button-hover-background, ${colors.primary700});
   }
   &:active {
-    background-color: ${colors.primary900};
+    background-color: var(--button-active-background, ${colors.primary900});
   }
   &:disabled {
     cursor: default;
-    background-color: ${colors.grey100};
+    background-color: var(--button-disabled-background, ${colors.grey100});
+    color: var(--button-disabled-color, ${colors.grey300});
   }
 `;
