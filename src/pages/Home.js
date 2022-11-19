@@ -79,14 +79,6 @@ export default function Home() {
     </MainFrame>
   );
 }
-
-const SkeletonFrame = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  row-gap: 16px;
-  column-gap: 16px;
-`;
-
 const RedColor = styled.div`
   background-color: ${colors.white};
 
