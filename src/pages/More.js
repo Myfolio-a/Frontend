@@ -9,6 +9,8 @@ import { response } from "msw";
 import MoreSkeleton from "./More.skeleton";
 
 export default function More() {
+  const TEMPLATE_INFO_URL = `https://y3c85nbyn7.execute-api.ap-northeast-2.amazonaws.com/v1/templates/${itemId}`;
+
   function reducer(state, action) {
     switch (action.type) {
       case "LOADING":
@@ -34,8 +36,6 @@ export default function More() {
     }
   }
   const { itemId } = useParams();
-
-  const TEMPLATE_INFO_URL = `https://y3c85nbyn7.execute-api.ap-northeast-2.amazonaws.com/v1/templates/${itemId}`;
 
   const [state, dispatch] = useReducer(reducer, {
     loading: false,
