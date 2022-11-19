@@ -36,6 +36,7 @@ const FrameGroup = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
+  width: 256px;
 `;
 
 const FavoriteFrame = styled.div`
