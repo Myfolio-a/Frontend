@@ -2,6 +2,7 @@ import * as colors from "../styles/colors";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { useState } from "react";
+import ResumeGridItem from "./ResumeGridItem";
 
 export default function Tab() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -16,11 +17,9 @@ export default function Tab() {
       id: 0,
       content: (
         <ResumeGrid>
-          <ResumeItem></ResumeItem>
-          <ResumeItem></ResumeItem>
-          <ResumeItem></ResumeItem>
-          <ResumeItem></ResumeItem>
-          <ResumeItem></ResumeItem>
+          <ResumeGridItem />
+          <ResumeGridItem />
+          <ResumeGridItem />
         </ResumeGrid>
       ),
     },
@@ -50,14 +49,7 @@ export default function Tab() {
   );
 }
 
-const ResumeItem = styled.div`
-  background-color: red;
-  height: 270px;
-`;
-
 const ResumeGrid = styled.div`
-  background-color: blue;
-
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;
