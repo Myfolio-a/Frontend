@@ -14,7 +14,15 @@ export default function Tab() {
     {
       tabName: "Resumes",
       id: 0,
-      content: <div>Resume Area</div>,
+      content: (
+        <ResumeGrid>
+          <ResumeItem></ResumeItem>
+          <ResumeItem></ResumeItem>
+          <ResumeItem></ResumeItem>
+          <ResumeItem></ResumeItem>
+          <ResumeItem></ResumeItem>
+        </ResumeGrid>
+      ),
     },
     {
       tabName: "Portfolios",
@@ -42,6 +50,19 @@ export default function Tab() {
   );
 }
 
+const ResumeItem = styled.div`
+  background-color: red;
+  height: 270px;
+`;
+
+const ResumeGrid = styled.div`
+  background-color: blue;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+`;
+
 const TabItem = styled.li`
   font-size: 17px;
   font-weight: 400;
@@ -52,7 +73,7 @@ const TabItem = styled.li`
   padding-bottom: 8px;
 
   &.selected {
-    box-shadow: 0 2px 0 ${colors.primary500};
+    box-shadow: inset 0 -2px 0 ${colors.primary500};
   }
 
   &:hover {
