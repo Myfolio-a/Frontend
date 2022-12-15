@@ -11,7 +11,7 @@ import {
 } from "react-icons/hi2";
 import { useEffect, useRef, useState } from "react";
 
-export default function ResumeGridItem() {
+export default function ResumeGridItem({ Title, LastEdit }) {
   const [show, setShow] = useState(false);
   const outsideRef = useRef(null);
 
@@ -25,7 +25,6 @@ export default function ResumeGridItem() {
         outsideRef.current !== null &&
         !outsideRef.current.contains(e.target)
       ) {
-        console.log("Clicked");
         setShow(!show);
       }
     };
@@ -43,8 +42,8 @@ export default function ResumeGridItem() {
       <Preview />
       <ControlFrame>
         <TitleFrame>
-          <Title>Untitled</Title>
-          <SubTitle>Updated last week</SubTitle>
+          <TitleText>{Title}</TitleText>
+          <SubTitle>{LastEdit}</SubTitle>
         </TitleFrame>
         <MenuFrame>
           <Menu
@@ -133,7 +132,7 @@ const SubTitle = styled.div`
   line-height: 18px;
 `;
 
-const Title = styled.div`
+const TitleText = styled.div`
   color: ${colors.grey900};
   font-size: 22px;
   font-weight: 400;

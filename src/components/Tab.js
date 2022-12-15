@@ -6,11 +6,52 @@ import ResumeGridItem from "./ResumeGridItem";
 import PortfolioGridItem from "./PortfolioGridItem";
 
 export default function Tab() {
+  const responseIndex = [
+    {
+      project_name: "Untitled 1",
+      last_modified: "2022.12.13 19:11",
+      project_style: "resume",
+    },
+    {
+      project_name: "Untitled 2",
+      last_modified: "2022.12.13 19:11",
+      project_style: "resume",
+    },
+    {
+      project_name: "Untitled 3",
+      last_modified: "2022.12.13 19:11",
+      project_style: "resume",
+    },
+    {
+      project_name: "Untitled 4",
+      last_modified: "2022.12.13 19:11",
+      project_style: "portfolio",
+    },
+    {
+      project_name: "Untitled 5",
+      last_modified: "2022.12.13 19:11",
+      project_style: "portfolio",
+    },
+    {
+      project_name: "Untitled 6",
+      last_modified: "2022.12.13 19:11",
+      project_style: "portfolio",
+    },
+  ];
+
   const [activeIndex, setActiveIndex] = useState(0);
 
   const tabClickHandler = (index) => {
     setActiveIndex(index);
   };
+
+  const resumeIndex = responseIndex.filter(
+    (proj) => proj.project_style === "resume"
+  );
+
+  const portfolioIndex = responseIndex.filter(
+    (proj) => proj.project_style === "portfolio"
+  );
 
   const TabList = [
     {
@@ -18,9 +59,14 @@ export default function Tab() {
       id: 0,
       content: (
         <ResumeGrid>
-          <ResumeGridItem />
-          <ResumeGridItem />
-          <ResumeGridItem />
+          {resumeIndex.map((index) => {
+            return (
+              <ResumeGridItem
+                Title={index.project_name}
+                LastEdit={index.last_modified}
+              />
+            );
+          })}
         </ResumeGrid>
       ),
     },
@@ -29,9 +75,14 @@ export default function Tab() {
       id: 1,
       content: (
         <ResumeGrid>
-          <PortfolioGridItem />
-          <PortfolioGridItem />
-          <PortfolioGridItem />
+          {portfolioIndex.map((index) => {
+            return (
+              <PortfolioGridItem
+                Title={index.project_name}
+                LastEdit={index.last_modified}
+              />
+            );
+          })}
         </ResumeGrid>
       ),
     },
