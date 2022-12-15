@@ -80,6 +80,8 @@ const StyledButton = styled.button`
 
   display: inline-flex;
 
+  user-select: none;
+
   height: var(--button-height, 40px);
   margin: 0;
   border: var(--button-border, none);

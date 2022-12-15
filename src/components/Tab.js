@@ -122,6 +122,8 @@ const TabItem = styled.li`
   padding-right: 8px;
   padding-bottom: 8px;
 
+  user-select: none;
+
   &.selected {
     box-shadow: inset 0 -2px 0 ${colors.primary500};
   }
