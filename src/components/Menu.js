@@ -11,7 +11,7 @@ const VARIANTS = {
   `,
 };
 
-export default function Menu({ Icon, Text, onClick, variant, ...rest }) {
+export default function Menu({ Icon, Text, onClick, variant, Ref, ...rest }) {
   const variantStyle = VARIANTS[variant];
   return (
     <MenuItem
@@ -19,6 +19,7 @@ export default function Menu({ Icon, Text, onClick, variant, ...rest }) {
       Icon={Icon}
       Text={Text}
       onClick={onClick}
+      ref={Ref}
     >
       {Icon && <IconFrame>{Icon}</IconFrame>}
       <TextFrame>{Text}</TextFrame>

@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { useState } from "react";
 import ResumeGridItem from "./ResumeGridItem";
+import PortfolioGridItem from "./PortfolioGridItem";
 
 export default function Tab() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -26,7 +27,13 @@ export default function Tab() {
     {
       tabName: "Portfolios",
       id: 1,
-      content: <div>Portfolio Area</div>,
+      content: (
+        <ResumeGrid>
+          <PortfolioGridItem />
+          <PortfolioGridItem />
+          <PortfolioGridItem />
+        </ResumeGrid>
+      ),
     },
   ];
 
