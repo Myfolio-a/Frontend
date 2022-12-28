@@ -34,6 +34,8 @@ const TextFrame = styled.div`
   line-height: 22px;
   color: var(--text-color, ${colors.grey500});
 
+  user-select: none;
+
   flex: 1;
   display: flex;
   align-items: center;
