@@ -8,6 +8,7 @@ import {
   HiOutlineHeart,
   HiOutlinePencil,
   HiOutlineFlag,
+  HiOutlineUserCircle,
 } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 
@@ -53,9 +54,28 @@ export default function GlobalNavigation() {
           onClick={() => navigate("/signup")}
         />
       </MenuFrame>
+      <MenuBottom>
+        <Menu
+          Text="Login"
+          Icon={<HiOutlineUserCircle />}
+          onClick={() => navigate("/login")}
+        />
+      </MenuBottom>
     </Background>
   );
 }
+
+const MenuBottom = styled.div`
+  bottom: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 16px;
+
+  position: absolute;
+  width: 208px;
+`;
 
 const MenuFrame = styled.div`
   padding: 16px;

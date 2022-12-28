@@ -50,7 +50,6 @@ export default function Home() {
     <MainFrame>
       <GlobalNavigation />
       <ViewFrame>
-        <Topbar />
         <GridViewFrame>
           {loading || !template ? (
             <RedColor>
@@ -84,8 +83,8 @@ const RedColor = styled.div`
 
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  row-gap: 16px;
-  column-gap: 16px;
+  row-gap: 24px;
+  column-gap: 24px;
   padding-bottom: 32px;
 `;
 
@@ -107,5 +106,5 @@ const MainFrame = styled.div`
   display: flex;
   flex-direction: row;
   margin-left: 240px;
-  margin-top: 112px;
+  margin-top: 64px;
 `;
