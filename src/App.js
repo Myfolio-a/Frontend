@@ -13,11 +13,6 @@ function App() {
   return (
     <div className="App">
       <Global styles={style} />
-      {/* Navigater
-      <Link to="/">Home</Link>
-      <Link to="/signup">Sign Up</Link>
-      <Link to="/login">Login</Link>
-      <Link to="/main">Main</Link> */}
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/templates/:itemId" element={<More />} />

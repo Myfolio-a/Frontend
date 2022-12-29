@@ -11,13 +11,28 @@ import {
   HiOutlineUserCircle,
 } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../api/AuthContextProvider";
 
 export default function GlobalNavigation() {
   const navigate = useNavigate();
 
+  const { setLoggedUser, loggedUser } = useContext(AuthContext);
+
   const matchHomeMenu = useMatch("/");
   const matchFavoriteMenu = useMatch("/favorite");
   const matchEditMenu = useMatch("/edit");
+
+  const handleProfileClick = () => {
+    if (loggedUser === null) {
+      navigate("/login");
+      return;
+    }
+    setLoggedUser(null);
+    alert("로그아웃 되었습니다.");
+  };
+
+  console.log(loggedUser);
 
   return (
     <Background>
@@ -56,9 +71,9 @@ export default function GlobalNavigation() {
       </MenuFrame>
       <MenuBottom>
         <Menu
-          Text="Login"
+          Text={loggedUser === null ? "Login" : loggedUser?.username}
           Icon={<HiOutlineUserCircle />}
-          onClick={() => navigate("/login")}
+          onClick={handleProfileClick}
         />
       </MenuBottom>
     </Background>

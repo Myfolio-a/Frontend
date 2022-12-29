@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import Button from "../components/Button";
@@ -7,6 +7,7 @@ import { HiOutlineEye, HiOutlineEyeSlash } from "react-icons/hi2";
 import * as colors from "../styles/colors";
 import axios from "../api/axios";
 import { response } from "msw";
+import { AuthContext } from "../api/AuthContextProvider";
 
 const LOGIN_URL =
   "https://y3c85nbyn7.execute-api.ap-northeast-2.amazonaws.com/v1/auth/login";
@@ -29,6 +30,8 @@ export default function Login() {
     type: "password",
     visible: false,
   });
+
+  const { setLoggedUser, setLoggedIn } = useContext(AuthContext);
 
   const handlePasswordType = (e) => {
     setPasswordType(() => {
@@ -105,6 +108,7 @@ export default function Login() {
         console.log("Saved token to local storage.");
       }
       // 전역상태에 있는 로그인 상태를 true로 바꾼다.
+      setLoggedUser(response.data.user);
 
       // home 으로 이동한다. (useNavigate)
       navigate("/");
