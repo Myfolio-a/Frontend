@@ -10,10 +10,12 @@ import {
   HiOutlineTrash,
 } from "react-icons/hi2";
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-export default function ResumeGridItem({ Title, LastEdit }) {
+export default function ResumeGridItem({ Title, LastEdit, Id }) {
   const [show, setShow] = useState(false);
   const outsideRef = useRef(null);
+  const navigate = useNavigate();
 
   const handleDropdownButton = () => {
     show ? setShow(false) : setShow(true);
@@ -49,6 +51,7 @@ export default function ResumeGridItem({ Title, LastEdit }) {
           <Menu
             Text="Edit"
             Icon={<HiOutlinePencil style={{ color: `${colors.primary500}` }} />}
+            onClick={() => navigate("/edit/" + Id)}
           />
           <Menu
             Text="Share"

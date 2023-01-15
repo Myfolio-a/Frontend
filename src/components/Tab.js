@@ -8,31 +8,37 @@ import PortfolioGridItem from "./PortfolioGridItem";
 export default function Tab() {
   const responseIndex = [
     {
+      id: "1",
       project_name: "Untitled 1",
       last_modified: "2022.12.13 19:11",
       project_style: "resume",
     },
     {
+      id: "2",
       project_name: "Untitled 2",
       last_modified: "2022.12.13 19:11",
       project_style: "resume",
     },
     {
+      id: "3",
       project_name: "Untitled 3",
       last_modified: "2022.12.13 19:11",
       project_style: "resume",
     },
     {
+      id: "4",
       project_name: "Untitled 4",
       last_modified: "2022.12.13 19:11",
       project_style: "portfolio",
     },
     {
+      id: "5",
       project_name: "Untitled 5",
       last_modified: "2022.12.13 19:11",
       project_style: "portfolio",
     },
     {
+      id: "6",
       project_name: "Untitled 6",
       last_modified: "2022.12.13 19:11",
       project_style: "portfolio",
@@ -64,6 +70,7 @@ export default function Tab() {
               <ResumeGridItem
                 Title={index.project_name}
                 LastEdit={index.last_modified}
+                Id={index.id}
               />
             );
           })}
@@ -80,6 +87,7 @@ export default function Tab() {
               <PortfolioGridItem
                 Title={index.project_name}
                 LastEdit={index.last_modified}
+                Id={index.id}
               />
             );
           })}

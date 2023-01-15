@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Favorite from "./pages/Favorite";
 import Edit from "./pages/Edit";
 import More from "./pages/More";
+import FolioEdit from "./pages/FolioEdit";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/favorite" element={<Favorite />} />
         <Route path="/edit" element={<Edit />} />
+        <Route path="/edit/:itemId" element={<FolioEdit />} />
       </Routes>
     </div>
   );
