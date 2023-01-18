@@ -17,13 +17,13 @@ export function AuthContextProvider({ children }) {
     }));
   };
 
-  const ASD = {
+  const contextValue = {
     ...state,
     setLoggedUser,
   };
 
   return (
-    <AuthContext.Provider value={ASD}>
+    <AuthContext.Provider value={contextValue}>
       <Fragment>{children}</Fragment>
     </AuthContext.Provider>
   );
