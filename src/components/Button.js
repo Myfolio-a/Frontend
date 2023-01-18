@@ -31,9 +31,28 @@ const VARIANTS = {
     --button-background-color: ${colors.white};
     --button-color: ${colors.grey900};
     --button-background-color: ${colors.white};
-    --button-color: ${colors.grey900};
     --button-hover-background: ${colors.grey50};
     --button-active-background: ${colors.grey100};
+    --button-disabled-background: ${colors.white};
+    --button-disabled-color: ${colors.grey300};
+  `,
+};
+
+const COLORSCHEME = {
+  white: css`
+    ${(p) =>
+      p.variant === "secondary"
+        ? `--button-border: 1px solid ${colors.white}`
+        : ``};
+    --button-background-color: rgba(0, 0, 0, 0);
+    --button-color: ${colors.white};
+
+    --button-hover-background: ${colors.white};
+    --button-hover-color: ${colors.grey900};
+
+    --button-active-background: ${colors.grey100};
+    --button-active-color: ${colors.grey900}
+
     --button-disabled-background: ${colors.white};
     --button-disabled-color: ${colors.grey300};
   `,
@@ -44,12 +63,14 @@ export default function Button({
   children,
   size,
   variant,
+  colorScheme,
   fullWidth,
   loading,
   ...rest
 }) {
   const sizeStyle = SIZES[size];
   const variantStyle = VARIANTS[variant];
+  const colorStyle = COLORSCHEME[colorScheme];
 
   return (
     <StyledButton
@@ -57,6 +78,7 @@ export default function Button({
       sizeStyle={sizeStyle}
       fullWidth={fullWidth}
       variantStyle={variantStyle}
+      colorStyle={colorStyle}
       {...rest}
     >
       {children}
@@ -68,6 +90,7 @@ export default function Button({
 const StyledButton = styled.button`
   ${(p) => p.sizeStyle}
   ${(p) => p.variantStyle}
+  ${(p) => p.colorStyle}
 
   ${(p) =>
     p.fullWidth &&
@@ -99,9 +122,11 @@ const StyledButton = styled.button`
 
   &:hover {
     background-color: var(--button-hover-background, ${colors.primary700});
+    color: var(--button-hover-color, ${colors.white});
   }
   &:active {
     background-color: var(--button-active-background, ${colors.primary900});
+    color: var(--button-active-color, ${colors.white});
   }
   &:disabled {
     cursor: default;
