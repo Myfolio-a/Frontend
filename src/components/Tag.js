@@ -14,4 +14,6 @@ const MainFrame = styled.div`
 
   font-size: 14px;
   font-weight: 700;
+
+  user-select: none;
 `;
