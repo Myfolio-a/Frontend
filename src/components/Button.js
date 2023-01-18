@@ -84,6 +84,8 @@ const StyledButton = styled.button`
 
   height: var(--button-height, 40px);
   margin: 0;
+  justify-content: center;
+  align-items: center;
   border: var(--button-border, none);
   border-radius: var(--button-radius, 4px);
   cursor: pointer;
