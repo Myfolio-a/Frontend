@@ -70,7 +70,7 @@ export default function More() {
               <Title>{info.title}</Title>
               <ProfileFrame>
                 <Profile />
-                <Username>{info.user.username}</Username>
+                <Username>{info.author.username}</Username>
               </ProfileFrame>
             </TitleFrame>
             <ButtonFrame>

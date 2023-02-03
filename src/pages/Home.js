@@ -16,11 +16,13 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [template, setTemplate] = useState(null);
 
+  const params = { type: "resume" };
+
   const fetchItems = async () => {
     try {
       setTemplate(null);
       setLoading(true);
-      const response = await axios.get(GETITEMS_URL);
+      const response = await axios.get(GETITEMS_URL, { params });
       setTemplate(response.data.templates);
     } catch (e) {
       console.log(e);
@@ -33,13 +35,13 @@ export default function Home() {
   }, []);
 
   const handleItemClick = (id) => {
-    const result = template.filter((item) => item.template_id === id);
+    const result = template.filter((item) => item.id === id);
     console.log(result[0].title);
     return navigate("/templates/" + id);
   };
 
   const handleUserClick = (id) => {
-    const result = template.filter((item) => item.template_id === id);
+    const result = template.filter((item) => item.id === id);
     return console.log(result[0].username);
   };
 
@@ -62,10 +64,10 @@ export default function Home() {
             <RedColor>
               {template.map((item) => (
                 <GridItem
-                  key={item.template_id}
-                  id={item.template_id}
+                  key={item.id}
+                  id={item.id}
                   title={item.title}
-                  username={item.user.username}
+                  username={item.author.username}
                   favorite={item.likes}
                   handleItemClick={handleItemClick}
                   handleUserClick={handleUserClick}
