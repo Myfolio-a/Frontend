@@ -37,20 +37,27 @@ export default function GlobalNavigation() {
     alert("로그아웃 되었습니다.");
   };
 
-  const loginToken = localStorage.getItem("login-token");
+  const accessToken = localStorage.getItem("access-token");
   const fetchItems = async () => {
     try {
       const response = await axios.get(USERINFO_URL, {
-        headers: { Authorization: `Bearer ${loginToken}` },
+        headers: { Authorization: `Bearer ${accessToken}` },
       });
       setLoggedUser(response.data);
     } catch (e) {
       console.log(e);
+      if (!e?.response) {
+        console.log("No server response");
+      } else if (e.response.status === 400) {
+        console.log("Bad request");
+      } else if (e.response.status === 404) {
+        console.log("Not found");
+      }
     }
   };
 
   useEffect(() => {
-    if (loggedUser === null && loginToken !== null) {
+    if (loggedUser === null && accessToken !== null) {
       fetchItems();
     }
   }, []);
