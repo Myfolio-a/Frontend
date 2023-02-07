@@ -40,73 +40,65 @@ export default function PortfolioGridItem({ Title, LastEdit, Id }) {
   }, [show]);
   return (
     <MainFrame>
-      <div>
+      <Preview />
+      <ControlFrame>
         <TitleFrame>
           <TitleText>{Title}</TitleText>
           <SubTitle>{LastEdit}</SubTitle>
         </TitleFrame>
-        <PreviewFrame>
-          <Preview />
-          <MenuFrame>
-            <Menu
-              Text="Edit"
-              Icon={
-                <HiOutlinePencil style={{ color: `${colors.primary500}` }} />
-              }
-              onClick={() => navigate("/edit/" + Id)}
-            />
-            <Menu
-              Text="Share"
-              Icon={
-                <HiOutlineShare style={{ color: `${colors.primary500}` }} />
-              }
-            />
-            <Menu
-              Text="Download to PDF"
-              Icon={
-                <HiArrowDownTray style={{ color: `${colors.primary500}` }} />
-              }
-            />
-            <Menu
-              Ref={outsideRef}
-              Text="More"
-              Icon={
-                <HiEllipsisHorizontal
-                  style={{ color: `${colors.primary500}` }}
-                />
-              }
-              onClick={handleDropdownButton}
-            />
-            <Frame1>
-              {show ? (
-                <MenuBox>
-                  <MenuBoxFrame>
-                    <Menu
-                      Text="Make a copy"
-                      Icon={
-                        <HiOutlineDocumentDuplicate
-                          style={{ color: `${colors.primary500}` }}
-                        />
-                      }
-                    />
-                    <Menu
-                      Text="Delete"
-                      Icon={
-                        <HiOutlineTrash
-                          style={{ color: `${colors.primary500}` }}
-                        />
-                      }
-                    />
-                  </MenuBoxFrame>
-                </MenuBox>
-              ) : null}
-            </Frame1>
-          </MenuFrame>
-        </PreviewFrame>
-      </div>
+        <MenuFrame>
+          <Menu
+            Text="Edit"
+            Icon={<HiOutlinePencil style={{ color: `${colors.primary500}` }} />}
+            onClick={() => navigate("/edit/" + Id)}
+          />
+          <Menu
+            Text="Download to PDF"
+            Icon={<HiArrowDownTray style={{ color: `${colors.primary500}` }} />}
+          />
+          <Menu
+            Ref={outsideRef}
+            Text="More"
+            Icon={
+              <HiEllipsisHorizontal style={{ color: `${colors.primary500}` }} />
+            }
+            onClick={handleDropdownButton}
+          />
+          <Frame1>
+            {show ? (
+              <MenuBox>
+                <MenuBoxFrame>
+                  <Menu
+                    Text="Make a copy"
+                    Icon={
+                      <HiOutlineDocumentDuplicate
+                        style={{ color: `${colors.primary500}` }}
+                      />
+                    }
+                  />
+                  <Menu
+                    Text="Delete"
+                    Icon={
+                      <HiOutlineTrash
+                        style={{ color: `${colors.primary500}` }}
+                      />
+                    }
+                  />
+                </MenuBoxFrame>
+              </MenuBox>
+            ) : null}
+          </Frame1>
+        </MenuFrame>
+      </ControlFrame>
     </MainFrame>
   );
 }
+
+const ControlFrame = styled.div`
+  display: flex;
+  gap: 24px;
+  flex-direction: column;
+`;
 
 const MenuBox = styled.div`
   position: absolute;
@@ -149,9 +141,6 @@ const TitleFrame = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2px;
-  flex: 1;
-
-  margin-bottom: 16px;
 `;
 
 const PreviewFrame = styled.div`
@@ -174,5 +163,8 @@ const Preview = styled.div`
 `;
 
 const MainFrame = styled.div`
-  height: 270px;
+  margin-top: 24px;
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
 `;

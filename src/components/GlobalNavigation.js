@@ -11,10 +11,14 @@ import {
   HiOutlineUserCircle,
 } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../api/AuthContextProvider";
+import axios from "../api/axios";
 
 export default function GlobalNavigation() {
+  const USERINFO_URL =
+    "https://y3c85nbyn7.execute-api.ap-northeast-2.amazonaws.com/v1/auth/user-retriever";
+
   const navigate = useNavigate();
 
   const { setLoggedUser, loggedUser } = useContext(AuthContext);
@@ -29,8 +33,27 @@ export default function GlobalNavigation() {
       return;
     }
     setLoggedUser(null);
+    localStorage.removeItem("login-token");
     alert("로그아웃 되었습니다.");
   };
+
+  const loginToken = localStorage.getItem("login-token");
+  const fetchItems = async () => {
+    try {
+      const response = await axios.get(USERINFO_URL, {
+        headers: { Authorization: `Bearer ${loginToken}` },
+      });
+      setLoggedUser(response.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    if (loggedUser === null && loginToken !== null) {
+      fetchItems();
+    }
+  }, []);
 
   return (
     <Background>

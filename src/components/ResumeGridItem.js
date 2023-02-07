@@ -54,10 +54,6 @@ export default function ResumeGridItem({ Title, LastEdit, Id }) {
             onClick={() => navigate("/edit/" + Id)}
           />
           <Menu
-            Text="Share"
-            Icon={<HiOutlineShare style={{ color: `${colors.primary500}` }} />}
-          />
-          <Menu
             Text="Download to PDF"
             Icon={<HiArrowDownTray style={{ color: `${colors.primary500}` }} />}
           />
@@ -162,7 +158,6 @@ const Preview = styled.div`
 `;
 
 const MainFrame = styled.div`
-  height: 270px;
   display: flex;
   gap: 32px;
 `;

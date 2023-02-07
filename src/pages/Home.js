@@ -16,13 +16,11 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [template, setTemplate] = useState(null);
 
-  const params = { type: "resume" };
-
   const fetchItems = async () => {
     try {
       setTemplate(null);
       setLoading(true);
-      const response = await axios.get(GETITEMS_URL, { params });
+      const response = await axios.get(GETITEMS_URL);
       setTemplate(response.data.templates);
     } catch (e) {
       console.log(e);
@@ -36,7 +34,6 @@ export default function Home() {
 
   const handleItemClick = (id) => {
     const result = template.filter((item) => item.id === id);
-    console.log(result[0].title);
     return navigate("/templates/" + id);
   };
 

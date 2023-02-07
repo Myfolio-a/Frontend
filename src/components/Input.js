@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import React from "react";
 import * as colors from "../styles/colors";
-import { HiBolt } from "react-icons/hi2";
 
 const VARIANTS = {
   error: css`
