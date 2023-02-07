@@ -65,9 +65,11 @@ export default function SignUp() {
         username: nickname,
         password,
       });
-      const token = response.data.token;
-      if (token) {
-        localStorage.setItem("login-token", token);
+      const accessToken = response.data.access_token;
+      const refreshToken = response.data.refresh_token;
+      if (accessToken || refreshToken) {
+        localStorage.setItem("access-token", accessToken);
+        localStorage.setItem("refresh-token", refreshToken);
         console.log("Saved token to local storage.");
       }
       navigate("/");

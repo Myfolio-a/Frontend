@@ -101,10 +101,12 @@ export default function Login() {
         email,
         password,
       });
-      const token = response.data.token;
+      const accessToken = response.data.access_token;
+      const refreshToken = response.data.refresh_token;
       // 토큰을 로컬스토리지에 저장한다.
-      if (token) {
-        localStorage.setItem("login-token", token);
+      if (accessToken || refreshToken) {
+        localStorage.setItem("access-token", accessToken);
+        localStorage.setItem("refresh-token", refreshToken);
         console.log("Saved token to local storage.");
       }
       // 전역상태에 있는 로그인 상태를 true로 바꾼다.
