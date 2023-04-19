@@ -1,63 +1,64 @@
 import * as colors from "../styles/colors";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ResumeGridItem from "./ResumeGridItem";
 import PortfolioGridItem from "./PortfolioGridItem";
+import { HiPlus } from "react-icons/hi2";
+import axios from "axios";
+import ResumeSkeleton from "./ResumeGridItem.skeleton";
+import PortfolioSkeleton from "./PortfolioGridItem.skeleton";
+import { AuthContext } from "../api/AuthContextProvider";
+import { useNavigate } from "react-router-dom";
+import instance from "../api/instance";
 
 export default function Tab() {
-  const responseIndex = [
-    {
-      id: "1",
-      project_name: "Untitled 1",
-      last_modified: "2022.12.13 19:11",
-      project_style: "resume",
-    },
-    {
-      id: "2",
-      project_name: "Untitled 2",
-      last_modified: "2022.12.13 19:11",
-      project_style: "resume",
-    },
-    {
-      id: "3",
-      project_name: "Untitled 3",
-      last_modified: "2022.12.13 19:11",
-      project_style: "resume",
-    },
-    {
-      id: "4",
-      project_name: "Untitled 4",
-      last_modified: "2022.12.13 19:11",
-      project_style: "portfolio",
-    },
-    {
-      id: "5",
-      project_name: "Untitled 5",
-      last_modified: "2022.12.13 19:11",
-      project_style: "portfolio",
-    },
-    {
-      id: "6",
-      project_name: "Untitled 6",
-      last_modified: "2022.12.13 19:11",
-      project_style: "portfolio",
-    },
-  ];
+  const FOLIO_URL = "v1/folios";
 
   const [activeIndex, setActiveIndex] = useState(0);
+  const [folioList, setFolioList] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const { setLoggedUser, loggedUser } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  const accessToken = localStorage.getItem("access-token");
+  const fetchItems = async () => {
+    try {
+      setFolioList([]);
+      setLoading(true);
+      console.log("Loading");
+      const response = await instance.get(FOLIO_URL);
+      setFolioList(response.data.folios);
+    } catch (e) {
+      console.log(e);
+      if (e.response.status === 400) {
+        console.log("Invaild field value");
+      } else if (e.response.status === 401) {
+        console.log("Access token expired");
+      } else if (e.response.status === 404) {
+        console.log("Empty folio list");
+      }
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    if (loggedUser === null && accessToken === null) {
+      alert("로그인이 필요한 서비스입니다.");
+      navigate("/login");
+      return;
+    }
+    fetchItems();
+  }, []);
 
   const tabClickHandler = (index) => {
     setActiveIndex(index);
   };
 
-  const resumeIndex = responseIndex.filter(
-    (proj) => proj.project_style === "resume"
-  );
-
-  const portfolioIndex = responseIndex.filter(
-    (proj) => proj.project_style === "portfolio"
-  );
+  const resumeIndex = folioList.filter((proj) => proj.type === "resume");
+  const portfolioIndex = folioList.filter((proj) => proj.type === "portfolio");
 
   const TabList = [
     {
@@ -65,15 +66,23 @@ export default function Tab() {
       id: 0,
       content: (
         <ResumeGrid>
-          {resumeIndex.map((index) => {
-            return (
-              <ResumeGridItem
-                Title={index.project_name}
-                LastEdit={index.last_modified}
-                Id={index.id}
-              />
-            );
-          })}
+          {loading ? (
+            <ResumeSkeleton />
+          ) : (
+            <>
+              {resumeIndex.map((index) => {
+                return (
+                  <>
+                    <ResumeGridItem
+                      Title={index.title}
+                      LastEdit={index.last_modified}
+                      Id={index.id}
+                    />
+                  </>
+                );
+              })}
+            </>
+          )}
         </ResumeGrid>
       ),
     },
@@ -82,15 +91,21 @@ export default function Tab() {
       id: 1,
       content: (
         <ResumeGrid>
-          {portfolioIndex.map((index) => {
-            return (
-              <PortfolioGridItem
-                Title={index.project_name}
-                LastEdit={index.last_modified}
-                Id={index.id}
-              />
-            );
-          })}
+          {loading ? (
+            <PortfolioSkeleton />
+          ) : (
+            <>
+              {portfolioIndex.map((index) => {
+                return (
+                  <PortfolioGridItem
+                    Title={index.title}
+                    LastEdit={index.last_modified}
+                    Id={index.id}
+                  />
+                );
+              })}
+            </>
+          )}
         </ResumeGrid>
       ),
     },

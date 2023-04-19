@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "../api/axios";
+import axios from "../api/instance";
 import GlobalNavigation from "../components/GlobalNavigation";
 import GridItem from "../components/GridItem";
 import GridSkeleton from "../components/GridSkeleton";

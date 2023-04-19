@@ -1,16 +1,22 @@
 import styled from "@emotion/styled";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "../components/Button";
 import * as colors from "../styles/colors";
 import { HiOutlineHeart } from "react-icons/hi2";
-import { useEffect, useReducer } from "react";
-import axios from "../api/axios";
-import { response } from "msw";
+import { useContext, useEffect, useReducer } from "react";
+import instance from "../api/instance";
 import MoreSkeleton from "./More.skeleton";
+import { AuthContext } from "../api/AuthContextProvider";
+import axios from "axios";
 
 export default function More() {
   const { itemId } = useParams();
   const TEMPLATE_INFO_URL = `https://y3c85nbyn7.execute-api.ap-northeast-2.amazonaws.com/v1/templates/${itemId}`;
+  const USERINFO_URL =
+    "https://y3c85nbyn7.execute-api.ap-northeast-2.amazonaws.com/v1/auth/token/refresh";
+  const CREATE_FOLIO_URL = "v1/folios";
+  const { setLoggedUser, loggedUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   function reducer(state, action) {
     switch (action.type) {
@@ -52,10 +58,35 @@ export default function More() {
       dispatch({ type: "ERROR", error: e });
     }
   };
-  // if api works disable comment.
+
   useEffect(() => {
     fetchTemplate();
   }, []);
+
+  const accessToken = localStorage.getItem("access-token");
+  const handleCreateButtonClick = async () => {
+    try {
+      if (loggedUser === null) {
+        alert("로그인이 필요한 서비스입니다.");
+        navigate("/login");
+        return;
+      }
+      const response = await instance.post(CREATE_FOLIO_URL, {
+        base_template_id: itemId,
+        title: "Untitled",
+      });
+      console.log("Successful create folio");
+      navigate(`/edit/${response.data.id}`);
+    } catch (error) {
+      console.log(error);
+      if (error.response.status === 400) {
+        console.log("Cannot find the base template");
+        console.log("Invalid title format for folios");
+      } else if (error.response.status === 401) {
+        console.log("Access token expired");
+      }
+    }
+  };
 
   const { loading, data: info, error } = state;
 
@@ -77,7 +108,7 @@ export default function More() {
               <Button variant="secondary" style={{ padding: "8px 10px" }}>
                 <HiOutlineHeart style={{ width: "20px", height: "20px" }} />
               </Button>
-              <Button>Make Folio</Button>
+              <Button onClick={handleCreateButtonClick}>Make Folio</Button>
             </ButtonFrame>
           </HeaderFrame>
         </Header>

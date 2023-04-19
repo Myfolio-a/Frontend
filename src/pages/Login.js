@@ -5,7 +5,7 @@ import Button from "../components/Button";
 import Input from "../components/Input";
 import { HiOutlineEye, HiOutlineEyeSlash } from "react-icons/hi2";
 import * as colors from "../styles/colors";
-import axios from "../api/axios";
+import axios from "axios";
 import { response } from "msw";
 import { AuthContext } from "../api/AuthContextProvider";
 
@@ -31,7 +31,7 @@ export default function Login() {
     visible: false,
   });
 
-  const { setLoggedUser, setLoggedIn } = useContext(AuthContext);
+  const { setLoggedUser } = useContext(AuthContext);
 
   const handlePasswordType = (e) => {
     setPasswordType(() => {

@@ -13,11 +13,10 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../api/AuthContextProvider";
-import axios from "../api/axios";
+import instance from "../api/instance";
 
 export default function GlobalNavigation() {
-  const USERINFO_URL =
-    "https://y3c85nbyn7.execute-api.ap-northeast-2.amazonaws.com/v1/auth/user-retriever";
+  const USERINFO_URL = "v1/auth/token/verify";
 
   const navigate = useNavigate();
 
@@ -33,16 +32,16 @@ export default function GlobalNavigation() {
       return;
     }
     setLoggedUser(null);
-    localStorage.removeItem("login-token");
+    localStorage.removeItem("access-token");
+    localStorage.removeItem("refresh-token");
     alert("로그아웃 되었습니다.");
+    window.location.reload();
   };
 
   const accessToken = localStorage.getItem("access-token");
   const fetchItems = async () => {
     try {
-      const response = await axios.get(USERINFO_URL, {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      });
+      const response = await instance.get(USERINFO_URL);
       setLoggedUser(response.data);
     } catch (e) {
       console.log(e);

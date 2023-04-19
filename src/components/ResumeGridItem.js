@@ -11,14 +11,33 @@ import {
 } from "react-icons/hi2";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import instance from "../api/instance";
 
 export default function ResumeGridItem({ Title, LastEdit, Id }) {
+  const DELETE_FOLIO_URL = `v1/folios/${Id}`;
+
   const [show, setShow] = useState(false);
   const outsideRef = useRef(null);
   const navigate = useNavigate();
 
   const handleDropdownButton = () => {
     show ? setShow(false) : setShow(true);
+  };
+
+  const handleDeleteButtonClick = async () => {
+    try {
+      const response = await instance.delete(DELETE_FOLIO_URL);
+      window.location.reload();
+      console.log("Deleted");
+    } catch (error) {
+      if (!error?.response) {
+        console.log("No server response");
+      } else if (error.response.status === 400) {
+        console.log("Bad request");
+      } else if (error.response.status === 404) {
+        console.log("Not found");
+      }
+    }
   };
 
   useEffect(() => {
@@ -84,6 +103,7 @@ export default function ResumeGridItem({ Title, LastEdit, Id }) {
                         style={{ color: `${colors.primary500}` }}
                       />
                     }
+                    onClick={handleDeleteButtonClick}
                   />
                 </MenuBoxFrame>
               </MenuBox>

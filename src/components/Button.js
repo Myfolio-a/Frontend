@@ -6,9 +6,9 @@ import BeatLoader from "react-spinners/BeatLoader";
 
 const SIZES = {
   sm: css`
-    --button-height: 32px;
+    --button-height: 36px;
     --button-radius: 4px;
-    --button-font-size: 12px;
+    --button-font-size: 14px;
     --button-padding: 6px 12px;
   `,
   md: css`

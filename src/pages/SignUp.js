@@ -5,7 +5,7 @@ import Button from "../components/Button";
 import Input from "../components/Input";
 import { HiOutlineEye, HiOutlineEyeSlash } from "react-icons/hi2";
 import * as colors from "../styles/colors";
-import axios from "../api/axios";
+import axios from "../api/instance";
 
 const REGISTER_URL =
   "https://y3c85nbyn7.execute-api.ap-northeast-2.amazonaws.com/v1/users";
