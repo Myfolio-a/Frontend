@@ -11,7 +11,6 @@ import Tag from "../components/Tag";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import EditInput from "../components/EditInput";
-import HTMLRenderer from "react-html-renderer";
 import React from "react";
 
 export default function FolioEdit() {
@@ -46,6 +45,234 @@ export default function FolioEdit() {
   <div>Website: ${inputs.website}</div>
   <div>Gender: ${inputs.gender}</div>
 </div>
+  `;
+
+  const fuckHtml = `
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <style type="text/css">
+        body {
+          font-family: "SUIT";
+          color: #222;
+  
+          width: 100%;
+          margin: 0px;
+          display: flex;
+          justify-content: center;
+        }
+        h1 {
+          font-size: 80px;
+          font-weight: 800;
+          margin-top: 54px;
+          margin-bottom: 54px;
+        }
+        h2 {
+          font-size: 48px;
+          font-weight: 800;
+          margin: 64px 0px 32px;
+        }
+        h3 {
+          font-size: 32px;
+          font-weight: 800;
+          margin: 0px 0px 16px;
+        }
+        h4 {
+          font-size: 20px;
+          font-weight: 800;
+          margin: 0px 0px 8px;
+        }
+        span {
+          font-size: 16px;
+        }
+        p {
+          font-size: 18px;
+          margin: 0px 0px 16px;
+        }
+        .mb24 {
+          margin-bottom: 24px;
+        }
+        .main-description {
+          font-size: 32px;
+        }
+        .main-container {
+          width: 736px;
+          padding: 32px;
+        }
+        .exp {
+          display: flex;
+          flex-direction: column;
+        }
+        .exp-row {
+          display: flex;
+          flex-direction: row;
+  
+          padding: 48px 0px;
+          border-bottom: 1px solid #eee;
+        }
+        .exp-column-left {
+          display: flex;
+          flex-direction: column;
+  
+          width: 272px;
+          padding-right: 16px;
+        }
+        .exp-column-right {
+          display: flex;
+          flex-direction: column;
+  
+          width: 448px;
+          margin: 0;
+          padding: 0;
+        }
+        .proj {
+          margin-bottom: 16px;
+        }
+        .other {
+          padding: 48px 0px;
+          border-bottom: 1px solid #eee;
+        }
+      </style>
+    </head>
+    <body>
+      <div id="main-container" class="main-container">
+        <h1 id="main">{Hello}</h1>
+        <div id="description" class="main-description">{asdasdasdasdasdasd}</div>
+        <div id="experience" class="exp">
+          <h2 id="experience-title">Experience</h2>
+          <div id="row" class="exp-row">
+            <div id="column" class="exp-column-left">
+              <h3 id="exp-name0">{Name0}</h3>
+              <span id="exp-position0">{Position0}</span>
+              <span id="exp-date0">{Date0}</span>
+            </div>
+            <div id="column" class="exp-column-right">
+              <div id="worked0" class="proj">
+                <div class="mb24">
+                  <h3>{Worked0}</h3>
+                  <span id="worked0-date0">{worked0-date0}</span>
+                </div>
+                <div>
+                  <h4>Description</h4>
+                  <p id="worked0-desc0">{worked0-desc0}</p>
+                </div>
+                <div>
+                  <h4>What did i do</h4>
+                  <ul>
+                    <li id="worked0-did0">{worked0-did0}</li>
+                    <li id="worked0-did1">{worked0-did1}</li>
+                    <li id="worked0-did2">{worked0-did2}</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4>Stack</h4>
+                  <div id="worked0-stack0">{worked0-stack0}</div>
+                </div>
+              </div>
+            </div>
+            <div class="divider"></div>
+          </div>
+          <div class="exp-row">
+            <div class="exp-column-left">
+              <h3>{Name0}</h3>
+              <span>{Position0}</span>
+              <span>{Date0}</span>
+            </div>
+            <div class="exp-column-right">
+              <div class="proj">
+                <div class="mb24">
+                  <h3>{Worked0}</h3>
+                  <span>{worked0-date0}</span>
+                </div>
+                <div>
+                  <h4>Description</h4>
+                  <p>{worked0-desc0}</p>
+                </div>
+                <div>
+                  <h4>What did i do</h4>
+                  <ul>
+                    <li>{worked0-did0}</li>
+                    <li>{worked0-did1}</li>
+                    <li>{worked0-did2}</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4>Stack</h4>
+                  <div>{worked0-stack0}</div>
+                </div>
+              </div>
+              <div class="proj">
+                <div class="mb24">
+                  <h3>{Worked0}</h3>
+                  <span>{worked0-date0}</span>
+                </div>
+                <div>
+                  <h4>Description</h4>
+                  <p>{worked0-desc0}</p>
+                </div>
+                <div>
+                  <h4>What did i do</h4>
+                  <ul>
+                    <li>{worked0-did0}</li>
+                    <li>{worked0-did1}</li>
+                    <li>{worked0-did2}</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4>Stack</h4>
+                  <div>{worked0-stack0}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h2>Other Experiences</h2>
+            <div class="other">
+              <h3>{otherExperiences}</h3>
+              <span>{role}</span>
+              <span>{date}</span>
+              <p>{descriptions}</p>
+            </div>
+            <div class="other">
+              <h3>{otherExperiences}</h3>
+              <span>{role}</span>
+              <span>{date}</span>
+              <p>{descriptions}</p>
+            </div>
+          </div>
+          <div>
+            <h2>Skills</h2>
+            <div class="other">
+              <h3>Overall</h3>
+              <ul>
+                <li>{list}</li>
+                <li>{list}</li>
+                <li>{list}</li>
+              </ul>
+            </div>
+            <div class="other">
+              <h3>Communication</h3>
+              <ul>
+                <li>{list}</li>
+                <li>{list}</li>
+                <li>{list}</li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <h2>Contact</h2>
+            <ul>
+              <li><a href="#">Email</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Github</a></li>
+              <li><a href="#">Linkedin</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </body>
+  </html>
+  
   `;
 
   const onChangeUserInputs = (e) => {
@@ -114,6 +341,13 @@ export default function FolioEdit() {
     }
   };
 
+  const iframePart = () => {
+    return {
+      __html:
+        '<iframe src="./resume.html" width="100%" height="100%"></iframe>',
+    };
+  };
+
   useEffect(() => {
     if (userInputDataLocal !== null) {
       refreshed();
@@ -171,98 +405,101 @@ export default function FolioEdit() {
           </Topbar>
           <MainFrame>
             <InputFrame>
-              <NameInput>
+              <InputWrapper>
+                <NameInput>
+                  <Input
+                    id="firstName"
+                    label="First Name"
+                    onChange={onChangeUserInputs}
+                    value={inputs.firstName}
+                  />
+                  <Input
+                    id="lastName"
+                    label="Last Name"
+                    onChange={onChangeUserInputs}
+                    value={inputs.lastName}
+                  />
+                </NameInput>
                 <Input
-                  id="firstName"
-                  label="First Name"
+                  id="email"
+                  label="Email"
                   onChange={onChangeUserInputs}
-                  value={inputs.firstName}
+                  value={inputs.email}
                 />
                 <Input
-                  id="lastName"
-                  label="Last Name"
+                  id="headline"
+                  label="Headline"
                   onChange={onChangeUserInputs}
-                  value={inputs.lastName}
+                  value={inputs.headline}
                 />
-              </NameInput>
-              <Input
-                id="email"
-                label="Email"
-                onChange={onChangeUserInputs}
-                value={inputs.email}
-              />
-              <Input
-                id="headline"
-                label="Headline"
-                onChange={onChangeUserInputs}
-                value={inputs.headline}
-              />
-              {show.address && (
-                <EditInput
-                  id="address"
-                  label="Address"
-                  value={inputs.address}
-                  onChange={onChangeUserInputs}
-                  onCloseClick={handleAddButtonClick}
-                />
-              )}
-              {show.website && (
-                <EditInput
-                  id="website"
-                  label="Website"
-                  value={inputs.website}
-                  onChange={onChangeUserInputs}
-                  onCloseClick={handleAddButtonClick}
-                />
-              )}
-              {show.gender && (
-                <EditInput
-                  id="gender"
-                  label="Gender"
-                  value={inputs.gender}
-                  onChange={onChangeUserInputs}
-                  onCloseClick={handleAddButtonClick}
-                />
-              )}
-              <AddInputButtonFrame>
-                {!show.address && (
-                  <Button
-                    id="addressBtn"
-                    size="sm"
-                    variant="secondary"
-                    onClick={handleAddButtonClick}
-                  >
-                    Add Address
-                  </Button>
+                {show.address && (
+                  <EditInput
+                    id="address"
+                    label="Address"
+                    value={inputs.address}
+                    onChange={onChangeUserInputs}
+                    onCloseClick={handleAddButtonClick}
+                  />
                 )}
-                {!show.website && (
-                  <Button
-                    id="websiteBtn"
-                    size="sm"
-                    variant="secondary"
-                    onClick={handleAddButtonClick}
-                  >
-                    Add Website
-                  </Button>
+                {show.website && (
+                  <EditInput
+                    id="website"
+                    label="Website"
+                    value={inputs.website}
+                    onChange={onChangeUserInputs}
+                    onCloseClick={handleAddButtonClick}
+                  />
                 )}
-                {!show.gender && (
-                  <Button
-                    id="genderBtn"
-                    size="sm"
-                    variant="secondary"
-                    onClick={handleAddButtonClick}
-                  >
-                    Add Gender
-                  </Button>
+                {show.gender && (
+                  <EditInput
+                    id="gender"
+                    label="Gender"
+                    value={inputs.gender}
+                    onChange={onChangeUserInputs}
+                    onCloseClick={handleAddButtonClick}
+                  />
                 )}
-              </AddInputButtonFrame>
+                <AddInputButtonFrame>
+                  {!show.address && (
+                    <Button
+                      id="addressBtn"
+                      size="sm"
+                      variant="secondary"
+                      onClick={handleAddButtonClick}
+                    >
+                      Add Address
+                    </Button>
+                  )}
+                  {!show.website && (
+                    <Button
+                      id="websiteBtn"
+                      size="sm"
+                      variant="secondary"
+                      onClick={handleAddButtonClick}
+                    >
+                      Add Website
+                    </Button>
+                  )}
+                  {!show.gender && (
+                    <Button
+                      id="genderBtn"
+                      size="sm"
+                      variant="secondary"
+                      onClick={handleAddButtonClick}
+                    >
+                      Add Gender
+                    </Button>
+                  )}
+                </AddInputButtonFrame>
+              </InputWrapper>
             </InputFrame>
+
             <Divider />
             <RenderFrame>
               <TestFrame>
-                <TestRenderFrame>
-                  <div dangerouslySetInnerHTML={{ __html: hello }}></div>
-                </TestRenderFrame>
+                <RenderHtml
+                  dangerouslySetInnerHTML={{ __html: fuckHtml }}
+                ></RenderHtml>
               </TestFrame>
             </RenderFrame>
           </MainFrame>
@@ -271,6 +508,20 @@ export default function FolioEdit() {
     </Frame>
   );
 }
+
+const RenderHtml = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
+const InputWrapper = styled.div`
+  width: 1;
+
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 16px;
+`;
 
 const AddInputButtonFrame = styled.div`
   display: flex;
@@ -343,11 +594,6 @@ const RenderFrame = styled.div`
 const InputFrame = styled.div`
   width: calc(50% - 1px);
   height: 1;
-
-  display: flex;
-  flex-direction: column;
-  padding: 16px;
-  gap: 16px;
 `;
 
 const MainFrame = styled.div`
