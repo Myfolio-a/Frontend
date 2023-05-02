@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style type="text/css">
+      body {
+        font-family: "SUIT";
+        color: #222;
+
+        width: 100%;
+        margin: 0px;
+        display: flex;
+        justify-content: center;
+      }
+      h1 {
+        font-size: 80px;
+        font-weight: 800;
+        margin-top: 54px;
+        margin-bottom: 54px;
+      }
+      h2 {
+        font-size: 48px;
+        font-weight: 800;
+        margin: 64px 0px 32px;
+      }
+      h3 {
+        font-size: 32px;
+        font-weight: 800;
+        margin: 0px 0px 16px;
+      }
+      h4 {
+        font-size: 20px;
+        font-weight: 800;
+        margin: 0px 0px 8px;
+      }
+      span {
+        font-size: 16px;
+      }
+      p {
+        font-size: 18px;
+        margin: 0px 0px 16px;
+      }
+      .mb24 {
+        margin-bottom: 24px;
+      }
+      .main-description {
+        font-size: 32px;
+      }
+      .main-container {
+        width: 736px;
+        padding: 32px;
+      }
+      .exp {
+        display: flex;
+        flex-direction: column;
+      }
+      .exp-row {
+        display: flex;
+        flex-direction: row;
+
+        padding: 48px 0px;
+        border-bottom: 1px solid #eee;
+      }
+      .exp-column-left {
+        display: flex;
+        flex-direction: column;
+
+        width: 272px;
+        padding-right: 16px;
+      }
+      .exp-column-right {
+        display: flex;
+        flex-direction: column;
+
+        width: 448px;
+        margin: 0;
+        padding: 0;
+      }
+      .proj {
+        margin-bottom: 16px;
+      }
+      .other {
+        padding: 48px 0px;
+        border-bottom: 1px solid #eee;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-container">
+      <h1>{Hello}</h1>
+      <div class="main-description">{asdasdasdasdasdasd}</div>
+      <div class="exp">
+        <h2>Experience</h2>
+        <div class="exp-row">
+          <div class="exp-column-left">
+            <h3>{Name0}</h3>
+            <span>{Position0}</span>
+            <span>{Date0}</span>
+          </div>
+          <div class="exp-column-right">
+            <div class="proj">
+              <div class="mb24">
+                <h3>{Worked0}</h3>
+                <span>{worked0-date0}</span>
+              </div>
+              <div>
+                <h4>Description</h4>
+                <p>{worked0-desc0}</p>
+              </div>
+              <div>
+                <h4>What did i do</h4>
+                <ul>
+                  <li>{worked0-did0}</li>
+                  <li>{worked0-did1}</li>
+                  <li>{worked0-did2}</li>
+                </ul>
+              </div>
+              <div>
+                <h4>Stack</h4>
+                <div>{worked0-stack0}</div>
+              </div>
+            </div>
+          </div>
+          <div class="divider"></div>
+        </div>
+        <div class="exp-row">
+          <div class="exp-column-left">
+            <h3>{Name0}</h3>
+            <span>{Position0}</span>
+            <span>{Date0}</span>
+          </div>
+          <div class="exp-column-right">
+            <div class="proj">
+              <div class="mb24">
+                <h3>{Worked0}</h3>
+                <span>{worked0-date0}</span>
+              </div>
+              <div>
+                <h4>Description</h4>
+                <p>{worked0-desc0}</p>
+              </div>
+              <div>
+                <h4>What did i do</h4>
+                <ul>
+                  <li>{worked0-did0}</li>
+                  <li>{worked0-did1}</li>
+                  <li>{worked0-did2}</li>
+                </ul>
+              </div>
+              <div>
+                <h4>Stack</h4>
+                <div>{worked0-stack0}</div>
+              </div>
+            </div>
+            <div class="proj">
+              <div class="mb24">
+                <h3>{Worked0}</h3>
+                <span>{worked0-date0}</span>
+              </div>
+              <div>
+                <h4>Description</h4>
+                <p>{worked0-desc0}</p>
+              </div>
+              <div>
+                <h4>What did i do</h4>
+                <ul>
+                  <li>{worked0-did0}</li>
+                  <li>{worked0-did1}</li>
+                  <li>{worked0-did2}</li>
+                </ul>
+              </div>
+              <div>
+                <h4>Stack</h4>
+                <div>{worked0-stack0}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h2>Other Experiences</h2>
+          <div class="other">
+            <h3>{otherExperiences}</h3>
+            <span>{role}</span>
+            <span>{date}</span>
+            <p>{descriptions}</p>
+          </div>
+          <div class="other">
+            <h3>{otherExperiences}</h3>
+            <span>{role}</span>
+            <span>{date}</span>
+            <p>{descriptions}</p>
+          </div>
+        </div>
+        <div>
+          <h2>Skills</h2>
+          <div class="other">
+            <h3>Overall</h3>
+            <ul>
+              <li>{list}</li>
+              <li>{list}</li>
+              <li>{list}</li>
+            </ul>
+          </div>
+          <div class="other">
+            <h3>Communication</h3>
+            <ul>
+              <li>{list}</li>
+              <li>{list}</li>
+              <li>{list}</li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <h2>Contact</h2>
+          <ul>
+            <li><a href="#">Email</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Github</a></li>
+            <li><a href="#">Linkedin</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
