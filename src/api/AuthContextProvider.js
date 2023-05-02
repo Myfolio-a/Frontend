@@ -1,4 +1,5 @@
 import { createContext, Fragment, useState } from "react";
+import React from "react";
 
 export const AuthContext = createContext();
 

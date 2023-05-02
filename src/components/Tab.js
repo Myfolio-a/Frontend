@@ -11,6 +11,7 @@ import PortfolioSkeleton from "./PortfolioGridItem.skeleton";
 import { AuthContext } from "../api/AuthContextProvider";
 import { useNavigate } from "react-router-dom";
 import instance from "../api/instance";
+import React from "react";
 
 export default function Tab() {
   const FOLIO_URL = "v1/folios";

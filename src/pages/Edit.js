@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "@emotion/styled";
 import GlobalNavigation from "../components/GlobalNavigation";
 import Tab from "../components/Tab";

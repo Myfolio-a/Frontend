@@ -11,6 +11,8 @@ import Tag from "../components/Tag";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import EditInput from "../components/EditInput";
+import HTMLRenderer from "react-html-renderer";
+import React from "react";
 
 export default function FolioEdit() {
   const navigate = useNavigate();
@@ -26,8 +28,6 @@ export default function FolioEdit() {
     website: "",
     gender: "",
   });
-  const { firstName, lastName, email, headline, address, website, gender } =
-    inputs;
 
   const [show, setShow] = useState({
     address: false,
@@ -35,44 +35,43 @@ export default function FolioEdit() {
     gender: false,
   });
 
-  // const asd = [
-  //   {
-  //     key: 1,
-  //     id: "address",
-  //     label: "Address",
-  //   },
-  //   {
-  //     key: 2,
-  //     id: "website",
-  //     label: "Website",
-  //   },
-  //   {
-  //     key: 3,
-  //     id: "gender",
-  //     label: "Gender",
-  //   },
-  // ];
+  const hello = `
+  <div>
+  <div>
+    Name: ${inputs.firstName} ${inputs.lastName}
+  </div>
+  <div>Email: ${inputs.email}</div>
+  <div>Headline: ${inputs.headline}</div>
+  <div>Address: ${inputs.address}</div>
+  <div>Website: ${inputs.website}</div>
+  <div>Gender: ${inputs.gender}</div>
+</div>
+  `;
 
   const onChangeUserInputs = (e) => {
     const { value, id } = e.target;
-    setInputs({
-      ...inputs,
+    console.log(value);
+    console.log(id);
+    setInputs((prev) => ({
+      ...prev,
       [id]: value,
-    });
+    }));
   };
 
   const handleAddButtonClick = (e) => {
     const { id } = e.target;
-    console.log(e.target);
-    setShow({
-      ...show,
-      [id]: !show[id],
-    });
-    setInputs({
-      ...inputs,
-      [id]: "",
-    });
-    console.log(show);
+    let res = id;
+    if (id.endsWith("Btn")) {
+      res = res.slice(0, -3);
+    }
+    setShow((prev) => ({
+      ...prev,
+      [res]: !prev[res],
+    }));
+    setInputs((prev) => ({
+      ...prev,
+      [res]: "",
+    }));
   };
 
   const handleCloseClick = (e) => {};
@@ -89,23 +88,30 @@ export default function FolioEdit() {
     localStorage.removeItem(`userInputData${itemId}`);
     localStorage.removeItem(`userButtondata${itemId}`);
 
-    const userInputData = localStorage.setItem(
-      `userInputData${itemId}`,
-      JSON.stringify(inputs)
-    );
-    const userButtonData = localStorage.setItem(
-      `userButtonData${itemId}`,
-      JSON.stringify(show)
-    );
+    if (inputs !== null) {
+      const userInputData = localStorage.setItem(
+        `userInputData${itemId}`,
+        JSON.stringify(inputs)
+      );
+    }
+
+    if (show !== null) {
+      const userButtonData = localStorage.setItem(
+        `userButtonData${itemId}`,
+        JSON.stringify(show)
+      );
+    }
+
     console.log("Saved");
   };
 
   const refreshed = () => {
-    setLoading(true);
-    setInputs(userInputDataLocal);
-    setShow(userButtonDataLocal);
-    setLoading(false);
-    console.log(show);
+    if (userInputDataLocal !== null) {
+      setInputs(userInputDataLocal);
+    }
+    if (userButtonDataLocal !== null) {
+      setShow(userButtonDataLocal);
+    }
   };
 
   useEffect(() => {
@@ -170,115 +176,92 @@ export default function FolioEdit() {
                   id="firstName"
                   label="First Name"
                   onChange={onChangeUserInputs}
-                  value={firstName}
+                  value={inputs.firstName}
                 />
                 <Input
                   id="lastName"
                   label="Last Name"
                   onChange={onChangeUserInputs}
-                  value={lastName}
+                  value={inputs.lastName}
                 />
               </NameInput>
               <Input
                 id="email"
                 label="Email"
                 onChange={onChangeUserInputs}
-                value={email}
+                value={inputs.email}
               />
               <Input
                 id="headline"
                 label="Headline"
                 onChange={onChangeUserInputs}
-                value={headline}
+                value={inputs.headline}
               />
-              {!show.address ? (
-                <></>
-              ) : (
+              {show.address && (
                 <EditInput
                   id="address"
                   label="Address"
-                  value={address}
+                  value={inputs.address}
                   onChange={onChangeUserInputs}
                   onCloseClick={handleAddButtonClick}
                 />
               )}
-              {!show.website ? (
-                <></>
-              ) : (
+              {show.website && (
                 <EditInput
                   id="website"
                   label="Website"
-                  value={website}
+                  value={inputs.website}
                   onChange={onChangeUserInputs}
+                  onCloseClick={handleAddButtonClick}
                 />
               )}
-              {!show.gender ? (
-                <></>
-              ) : (
+              {show.gender && (
                 <EditInput
                   id="gender"
                   label="Gender"
-                  value={gender}
+                  value={inputs.gender}
                   onChange={onChangeUserInputs}
+                  onCloseClick={handleAddButtonClick}
                 />
               )}
-
-              {/* {asd
-                .filter((userInput) => show[userInput.id] === true)
-                .map((userInput) => (
-                  <Input
-                    id={userInput.id}
-                    key={userInput.key}
-                    label={userInput.label}
-                    onChange={onChangeUserInputs}
-                    value={inputs[userInput.id]}
-                  />
-                ))} */}
               <AddInputButtonFrame>
-                {!show.address ? (
+                {!show.address && (
                   <Button
-                    id="address"
+                    id="addressBtn"
                     size="sm"
                     variant="secondary"
                     onClick={handleAddButtonClick}
                   >
                     Add Address
                   </Button>
-                ) : (
-                  <></>
                 )}
-                <Button
-                  id="website"
-                  size="sm"
-                  variant="secondary"
-                  onClick={handleAddButtonClick}
-                >
-                  Add Website
-                </Button>
-                <Button
-                  id="gender"
-                  size="sm"
-                  variant="secondary"
-                  onClick={handleAddButtonClick}
-                >
-                  Add Gender
-                </Button>
+                {!show.website && (
+                  <Button
+                    id="websiteBtn"
+                    size="sm"
+                    variant="secondary"
+                    onClick={handleAddButtonClick}
+                  >
+                    Add Website
+                  </Button>
+                )}
+                {!show.gender && (
+                  <Button
+                    id="genderBtn"
+                    size="sm"
+                    variant="secondary"
+                    onClick={handleAddButtonClick}
+                  >
+                    Add Gender
+                  </Button>
+                )}
               </AddInputButtonFrame>
             </InputFrame>
             <Divider />
             <RenderFrame>
               <TestFrame>
                 <TestRenderFrame>
-                  <div>
-                    <div>
-                      Name: {firstName} {lastName}
-                    </div>
-                    <div>Email: {email}</div>
-                    <div>Headline: {headline}</div>
-                    <div>Address: {inputs.address}</div>
-                    <div>Website: {inputs.website}</div>
-                    <div>Gender: {inputs.gender}</div>
-                  </div>
+                  <div dangerouslySetInnerHTML={{ __html: hello }}></div>
                 </TestRenderFrame>
               </TestFrame>
             </RenderFrame>

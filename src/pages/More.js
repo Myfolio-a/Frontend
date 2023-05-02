@@ -8,6 +8,7 @@ import instance from "../api/instance";
 import MoreSkeleton from "./More.skeleton";
 import { AuthContext } from "../api/AuthContextProvider";
 import axios from "axios";
+import React from "react";
 
 export default function More() {
   const { itemId } = useParams();

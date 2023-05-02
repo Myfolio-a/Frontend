@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import * as colors from "../styles/colors";
+import React from "react";
 
 const ResumeSkeleton = () => {
   return (

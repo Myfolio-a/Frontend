@@ -12,6 +12,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import instance from "../api/instance";
+import React from "react";
 
 export default function ResumeGridItem({ Title, LastEdit, Id }) {
   const DELETE_FOLIO_URL = `v1/folios/${Id}`;
@@ -30,7 +31,7 @@ export default function ResumeGridItem({ Title, LastEdit, Id }) {
       window.location.reload();
       console.log("Deleted");
     } catch (error) {
-      if (!error?.response) {
+      if (!error.response) {
         console.log("No server response");
       } else if (error.response.status === 400) {
         console.log("Bad request");

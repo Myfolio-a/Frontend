@@ -7,6 +7,7 @@ import { ReactComponent as Avatar } from "../Icons/Avatar.svg";
 import { HiOutlineBell } from "react-icons/hi2";
 import Menu from "./Menu";
 import { useNavigate } from "react-router-dom";
+import React from "react";
 
 export default function Topbar() {
   const navigate = useNavigate();

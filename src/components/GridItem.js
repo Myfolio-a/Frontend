@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import * as colors from "../styles/colors";
 import { HiOutlineHeart } from "react-icons/hi2";
+import React from "react";
 
 export default function GridItem({
   id,

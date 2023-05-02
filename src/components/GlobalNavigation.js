@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "@emotion/styled";
 import * as colors from "../styles/colors";
 import Menu from "../components/Menu";
@@ -45,7 +46,7 @@ export default function GlobalNavigation() {
       setLoggedUser(response.data);
     } catch (e) {
       console.log(e);
-      if (!e?.response) {
+      if (!e.response) {
         console.log("No server response");
       } else if (e.response.status === 400) {
         console.log("Bad request");
@@ -98,7 +99,7 @@ export default function GlobalNavigation() {
       </MenuFrame>
       <MenuBottom>
         <Menu
-          Text={loggedUser === null ? "Login" : loggedUser?.username}
+          Text={loggedUser === null ? "Login" : loggedUser.username}
           Icon={<HiOutlineUserCircle />}
           onClick={handleProfileClick}
         />

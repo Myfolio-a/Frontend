@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "@emotion/styled";
 import * as colors from "../styles/colors";
 import { HiXMark } from "react-icons/hi2";
@@ -12,7 +13,7 @@ const EditInput = ({ id, label, value, onCloseClick, ...rest }) => {
         </IconWrapper>
       </LabelWrapper>
       <LabelFrame></LabelFrame>
-      <StyledInput value={value} {...rest} />
+      <StyledInput id={id} value={value} {...rest} />
     </Frame>
   );
 };

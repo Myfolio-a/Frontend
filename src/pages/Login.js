@@ -116,7 +116,7 @@ export default function Login() {
       navigate("/");
     } catch (err) {
       console.log(err);
-      if (!err?.response) {
+      if (!err.response) {
         console.log("No server response");
       } else if (err.response.status === 400) {
         setLoginFail(true);

@@ -7,6 +7,7 @@ import GridItem from "../components/GridItem";
 import GridSkeleton from "../components/GridSkeleton";
 import Topbar from "../components/Topbar";
 import * as colors from "../styles/colors";
+import React from "react";
 
 export default function Home() {
   const GETITEMS_URL =
