@@ -18,7 +18,7 @@ export default function FolioEdit() {
   const { itemId } = useParams();
   const [loading, setLoading] = useState(false);
 
-  const [inputs, setInputs] = useState({
+  const exRes = {
     firstName: "",
     lastName: "",
     email: "",
@@ -26,7 +26,14 @@ export default function FolioEdit() {
     address: "",
     website: "",
     gender: "",
-  });
+    name0: "",
+    position0: "",
+    date0: "",
+    worked0: "",
+    worked0Date0: "",
+  };
+
+  const [inputs, setInputs] = useState(exRes);
 
   const [show, setShow] = useState({
     address: false,
@@ -49,236 +56,240 @@ export default function FolioEdit() {
 
   const fuckHtml = `
   <!DOCTYPE html>
-  <html>
-    <head>
-      <style type="text/css">
-        body {
-          font-family: "SUIT";
-          color: #222;
-  
-          width: 100%;
-          margin: 0px;
-          display: flex;
-          justify-content: center;
-        }
-        h1 {
-          font-size: 80px;
-          font-weight: 800;
-          margin-top: 54px;
-          margin-bottom: 54px;
-        }
-        h2 {
-          font-size: 48px;
-          font-weight: 800;
-          margin: 64px 0px 32px;
-        }
-        h3 {
-          font-size: 32px;
-          font-weight: 800;
-          margin: 0px 0px 16px;
-        }
-        h4 {
-          font-size: 20px;
-          font-weight: 800;
-          margin: 0px 0px 8px;
-        }
-        span {
-          font-size: 16px;
-        }
-        p {
-          font-size: 18px;
-          margin: 0px 0px 16px;
-        }
-        .mb24 {
-          margin-bottom: 24px;
-        }
-        .main-description {
-          font-size: 32px;
-        }
-        .main-container {
-          width: 736px;
-          padding: 32px;
-        }
-        .exp {
-          display: flex;
-          flex-direction: column;
-        }
-        .exp-row {
-          display: flex;
-          flex-direction: row;
-  
-          padding: 48px 0px;
-          border-bottom: 1px solid #eee;
-        }
-        .exp-column-left {
-          display: flex;
-          flex-direction: column;
-  
-          width: 272px;
-          padding-right: 16px;
-        }
-        .exp-column-right {
-          display: flex;
-          flex-direction: column;
-  
-          width: 448px;
-          margin: 0;
-          padding: 0;
-        }
-        .proj {
-          margin-bottom: 16px;
-        }
-        .other {
-          padding: 48px 0px;
-          border-bottom: 1px solid #eee;
-        }
-      </style>
-    </head>
-    <body>
-      <div id="main-container" class="main-container">
-        <h1 id="main">{Hello}</h1>
-        <div id="description" class="main-description">{asdasdasdasdasdasd}</div>
-        <div id="experience" class="exp">
-          <h2 id="experience-title">Experience</h2>
-          <div id="row" class="exp-row">
-            <div id="column" class="exp-column-left">
-              <h3 id="exp-name0">{Name0}</h3>
-              <span id="exp-position0">{Position0}</span>
-              <span id="exp-date0">{Date0}</span>
-            </div>
-            <div id="column" class="exp-column-right">
-              <div id="worked0" class="proj">
-                <div class="mb24">
-                  <h3>{Worked0}</h3>
-                  <span id="worked0-date0">{worked0-date0}</span>
-                </div>
-                <div>
-                  <h4>Description</h4>
-                  <p id="worked0-desc0">{worked0-desc0}</p>
-                </div>
-                <div>
-                  <h4>What did i do</h4>
-                  <ul>
-                    <li id="worked0-did0">{worked0-did0}</li>
-                    <li id="worked0-did1">{worked0-did1}</li>
-                    <li id="worked0-did2">{worked0-did2}</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4>Stack</h4>
-                  <div id="worked0-stack0">{worked0-stack0}</div>
-                </div>
-              </div>
-            </div>
-            <div class="divider"></div>
+<html>
+  <head>
+    <style type="text/css">
+      body {
+        font-family: "SUIT";
+        color: #222;
+
+        width: 100%;
+        margin: 0px;
+        display: flex;
+        justify-content: center;
+      }
+      h1 {
+        font-size: 80px;
+        font-weight: 800;
+        margin-top: 54px;
+        margin-bottom: 54px;
+      }
+      h2 {
+        font-size: 48px;
+        font-weight: 800;
+        margin: 64px 0px 32px;
+      }
+      h3 {
+        font-size: 32px;
+        font-weight: 800;
+        margin: 0px 0px 16px;
+      }
+      h4 {
+        font-size: 20px;
+        font-weight: 800;
+        margin: 0px 0px 8px;
+      }
+      span {
+        font-size: 16px;
+      }
+      p {
+        font-size: 18px;
+        margin: 0px 0px 16px;
+      }
+      ul {
+        margin-bottom: 16px;
+        list-style-type: square;
+        line-height: 1.6;
+        padding-left: 36px;
+      }
+      .mb24 {
+        margin-bottom: 24px;
+      }
+      .main-description {
+        font-size: 32px;
+      }
+      .main-container {
+        width: 736px;
+        padding: 32px;
+      }
+      .exp {
+        display: flex;
+        flex-direction: column;
+      }
+      .exp-row {
+        display: flex;
+        flex-direction: row;
+
+        padding: 48px 0px;
+        border-bottom: 1px solid #eee;
+      }
+      .exp-column-left {
+        display: flex;
+        flex-direction: column;
+
+        width: 272px;
+        padding-right: 16px;
+      }
+      .exp-column-right {
+        display: flex;
+        flex-direction: column;
+
+        width: 448px;
+        margin: 0;
+        padding: 0;
+      }
+      .proj {
+        margin-bottom: 16px;
+      }
+      .other {
+        padding: 48px 0px;
+        border-bottom: 1px solid #eee;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-container">
+      <h1>${inputs.firstName}</h1>
+      <div class="main-description">${inputs.lastName}</div>
+      <div class="exp">
+        <h2>Experience</h2>
+        <div class="exp-row">
+          <div class="exp-column-left">
+            <h3>${inputs.name0}</h3>
+            <span>${inputs.position0}</span>
+            <span>${inputs.date0}</span>
           </div>
-          <div class="exp-row">
-            <div class="exp-column-left">
-              <h3>{Name0}</h3>
-              <span>{Position0}</span>
-              <span>{Date0}</span>
-            </div>
-            <div class="exp-column-right">
-              <div class="proj">
-                <div class="mb24">
-                  <h3>{Worked0}</h3>
-                  <span>{worked0-date0}</span>
-                </div>
-                <div>
-                  <h4>Description</h4>
-                  <p>{worked0-desc0}</p>
-                </div>
-                <div>
-                  <h4>What did i do</h4>
-                  <ul>
-                    <li>{worked0-did0}</li>
-                    <li>{worked0-did1}</li>
-                    <li>{worked0-did2}</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4>Stack</h4>
-                  <div>{worked0-stack0}</div>
-                </div>
+          <div class="exp-column-right">
+            <div class="proj">
+              <div class="mb24">
+                <h3>${inputs.worked0}</h3>
+                <span>${inputs.worked0Date0}</span>
               </div>
-              <div class="proj">
-                <div class="mb24">
-                  <h3>{Worked0}</h3>
-                  <span>{worked0-date0}</span>
-                </div>
-                <div>
-                  <h4>Description</h4>
-                  <p>{worked0-desc0}</p>
-                </div>
-                <div>
-                  <h4>What did i do</h4>
-                  <ul>
-                    <li>{worked0-did0}</li>
-                    <li>{worked0-did1}</li>
-                    <li>{worked0-did2}</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4>Stack</h4>
-                  <div>{worked0-stack0}</div>
-                </div>
+              <div>
+                <h4>Description</h4>
+                <p>{worked0-desc0}</p>
+              </div>
+              <div>
+                <h4>What did i do</h4>
+                <ul>
+                  <li>{worked0-did0}</li>
+                  <li>{worked0-did1}</li>
+                  <li>{worked0-did2}</li>
+                </ul>
+              </div>
+              <div>
+                <h4>Stack</h4>
+                <div>{worked0-stack0}</div>
               </div>
             </div>
           </div>
-          <div>
-            <h2>Other Experiences</h2>
-            <div class="other">
-              <h3>{otherExperiences}</h3>
-              <span>{role}</span>
-              <span>{date}</span>
-              <p>{descriptions}</p>
+          <div class="divider"></div>
+        </div>
+        <div class="exp-row">
+          <div class="exp-column-left">
+            <h3>{Name0}</h3>
+            <span>{Position0}</span>
+            <span>{Date0}</span>
+          </div>
+          <div class="exp-column-right">
+            <div class="proj">
+              <div class="mb24">
+                <h3>{Worked0}</h3>
+                <span>{worked0-date0}</span>
+              </div>
+              <div>
+                <h4>Description</h4>
+                <p>{worked0-desc0}</p>
+              </div>
+              <div>
+                <h4>What did i do</h4>
+                <ul>
+                  <li>{worked0-did0}</li>
+                  <li>{worked0-did1}</li>
+                  <li>{worked0-did2}</li>
+                </ul>
+              </div>
+              <div>
+                <h4>Stack</h4>
+                <div>{worked0-stack0}</div>
+              </div>
             </div>
-            <div class="other">
-              <h3>{otherExperiences}</h3>
-              <span>{role}</span>
-              <span>{date}</span>
-              <p>{descriptions}</p>
+            <div class="proj">
+              <div class="mb24">
+                <h3>{Worked0}</h3>
+                <span>{worked0-date0}</span>
+              </div>
+              <div>
+                <h4>Description</h4>
+                <p>{worked0-desc0}</p>
+              </div>
+              <div>
+                <h4>What did i do</h4>
+                <ul>
+                  <li>{worked0-did0}</li>
+                  <li>{worked0-did1}</li>
+                  <li>{worked0-did2}</li>
+                </ul>
+              </div>
+              <div>
+                <h4>Stack</h4>
+                <div>{worked0-stack0}</div>
+              </div>
             </div>
           </div>
-          <div>
-            <h2>Skills</h2>
-            <div class="other">
-              <h3>Overall</h3>
-              <ul>
-                <li>{list}</li>
-                <li>{list}</li>
-                <li>{list}</li>
-              </ul>
-            </div>
-            <div class="other">
-              <h3>Communication</h3>
-              <ul>
-                <li>{list}</li>
-                <li>{list}</li>
-                <li>{list}</li>
-              </ul>
-            </div>
+        </div>
+        <div>
+          <h2>Other Experiences</h2>
+          <div class="other">
+            <h3>{otherExperiences}</h3>
+            <span>{role}</span>
+            <span>{date}</span>
+            <p>{descriptions}</p>
           </div>
-          <div>
-            <h2>Contact</h2>
+          <div class="other">
+            <h3>{otherExperiences}</h3>
+            <span>{role}</span>
+            <span>{date}</span>
+            <p>{descriptions}</p>
+          </div>
+        </div>
+        <div>
+          <h2>Skills</h2>
+          <div class="other">
+            <h3>Overall</h3>
             <ul>
-              <li><a href="#">Email</a></li>
-              <li><a href="#">Blog</a></li>
-              <li><a href="#">Github</a></li>
-              <li><a href="#">Linkedin</a></li>
+              <li>{list}</li>
+              <li>{list}</li>
+              <li>{list}</li>
+            </ul>
+          </div>
+          <div class="other">
+            <h3>Communication</h3>
+            <ul>
+              <li>{list}</li>
+              <li>{list}</li>
+              <li>{list}</li>
             </ul>
           </div>
         </div>
+        <div>
+          <h2>Contact</h2>
+          <ul>
+            <li><a href="#">Email</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Github</a></li>
+            <li><a href="#">Linkedin</a></li>
+          </ul>
+        </div>
       </div>
-    </body>
-  </html>
-  
+    </div>
+  </body>
+</html>
+
   `;
 
   const onChangeUserInputs = (e) => {
     const { value, id } = e.target;
-    console.log(value);
-    console.log(id);
     setInputs((prev) => ({
       ...prev,
       [id]: value,
@@ -491,6 +502,13 @@ export default function FolioEdit() {
                     </Button>
                   )}
                 </AddInputButtonFrame>
+                <DividerRow />
+                <Input
+                  id="name0"
+                  label="Name0"
+                  onChange={onChangeUserInputs}
+                  value={inputs.name0}
+                />
               </InputWrapper>
             </InputFrame>
 
@@ -537,6 +555,8 @@ const TestFrame = styled.div`
   width: calc(100% - 80px);
   height: calc(100% - 80px);
 
+  overflow: auto;
+
   background-color: ${colors.white};
   border-radius: 8px;
 `;
@@ -575,6 +595,12 @@ const ButtonFrame = styled.div`
 
   position: absolute;
   right: 12px;
+`;
+
+const DividerRow = styled.div`
+  height: 1px;
+  width: 100%;
+  background-color: ${colors.grey100};
 `;
 
 const Divider = styled.div`
